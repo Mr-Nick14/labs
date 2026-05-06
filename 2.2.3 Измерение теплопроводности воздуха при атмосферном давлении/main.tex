@@ -1,0 +1,379 @@
+\documentclass[12 pt, a4paper]{article}% тип документа, размер шрифта
+\usepackage{cmap}	
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+\usepackage{mathtext}
+\usepackage[T2A]{fontenc}%поддержка кириллицы в ЛаТеХ
+\usepackage[utf8]{inputenc}%кодировка
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{amsmath}%удобная вёрстка многострочных формул, масштабирующийся текст в формулах, формулы в рамках и др.
+\usepackage{amsfonts}%поддержка ажурного и готического шрифтов — например, для записи символа {\displaystyle \mathbb {R} } \mathbb {R} 
+\usepackage[table,xcdraw]{xcolor} %цветные таблички
+\usepackage{amssymb}%amsfonts + несколько сотен дополнительных математических символов
+\frenchspacing%запрет длинного пробела после точки
+\usepackage{setspace}%возможность установки межстрочного интервала
+\usepackage{indentfirst}%пакет позволяет делать в первом абзаце после заголовка абзацный отступ
+\onehalfspacing%установка полуторного интервала по умолчанию
+\usepackage{graphicx}%подключение рисунков
+\graphicspath{{images/}}%путь ко всем рисункам
+\usepackage{caption}
+\usepackage{float}%плавающие картинки
+\usepackage{tikz} % это для чудо-миллиметровки
+\usepackage{pgfplots}%для построения графиков
+\pgfplotsset{compat=newest, y label style={rotate=-90},  width=10 cm}%версия пакета построения графиков, ширина графиков
+\usepackage{pgfplotstable}%простое рисование табличек
+\usepackage{lastpage}%пакет нумерации страниц
+\usepackage{comment}%возможность вставлять большие комменты
+\usepackage{python}%питончик
+\usepackage{float}
+%%%%% ПОЛЯ
+\setlength\parindent{0pt} 
+\usepackage[top = 2 cm, bottom = 2 cm, left = 1.5 cm, right = 1.5 cm]{geometry}
+\setlength\parindent{0pt}
+%%%%% КОЛОНТИТУЛЫ
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{fancybox, fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[L]{Легких Никита Б05-301}
+\fancyhead[C]{2.4.1}
+% ЛЮБАЯ ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ
+\fancyfoot[R]{ФПМИ МФТИ}
+\renewcommand{\footrulewidth}{0.3 mm}
+ 
+
+\usepackage{graphicx}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage{wrapfig}
+%%% Заголовок
+%%% Новые команды
+\newcommand{\z}[2]{{{\vspace{0.6cm} \textbf{{Задача {#1}}} \textit{{#2}\\ }}} }
+\newcommand{\otv}{{\vspace{0.3cm} \textbf{Ответ: }}}
+\newcommand{\uk}{\underline{\textit{Указание.}} }
+\newcommand{\prim}{\underline{\textit{Примечание.}} }
+\newcommand{\sol}[1]{{{\vspace{0.3cm} \textbf{{Задача {#1}} }\\ }}}
+
+
+
+\begin{document} % конец преамбулы, начало документа
+
+\begin{center}
+\section*{Работа № 2.2.3}
+    \section*{Измерение теплопроводности воздуха при атмосферном давлении}
+\end{center}
+\textbf{Цель работы:} определение коэффициента теплопроводности воздуха или углекислого газа при атмосферном давлении и разных температурах по теплоотдаче нагреваемой током нити в цилиндрическом сосуде.
+\\ \\
+\textbf{В работе используются:} прибор для определения теплопроводности газов; форвакуумный насос; газгольдер с углекислым газом; манометр; магазин сопротивлений; эталонное сопротивление 10 Ом; цифровой вольтметр В7-38; источник питания.
+
+\section*{Теоретическая справка}
+Теплопроводность - это процесс передачи тепловой энергии от нагретых
+частей системы к холодным за счёт хаотического движения частиц среды (молекул, атомов и т.п.). Закон Фурье:
+\begin{equation}
+\overrightarrow{q}=-\kappa\cdot \nabla T
+\end{equation}
+$\overrightarrow{q}$ - плотность потока энергии, $\kappa \backsim \lambda\bar{\upsilon}\cdot nc_v$ - коэффицент теплопроводности.
+Для цилиндрической геометрии (рис. ниже)
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.25\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/Цилиндр.png}
+\label{fig:mpr}
+\end{figure} \\
+Справедливы следующие уравнения: 
+$$q = - \kappa \frac{dT}{dr}$$
+$$Q = 2\pi r L \cdot q \Rightarrow$$
+$$Q = - 2\pi rL\kappa \frac{dT}{dr} \Rightarrow$$
+Для стационарного режима и малого перепада температуры между нитью и стенками цилиндра:
+\begin{equation}\label{2}
+Q = -2\pi r L\cdot \kappa \frac{dT}{dr}=\frac{2\pi L}{ln\frac{r_0}{r_1}}\kappa\cdot \Delta T
+\end{equation}
+
+\section*{Установка}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/установка.png}
+\label{fig:mpr}
+\end{figure}
+Схема установки изображена на
+рисунке выше (с поправкой на другую схему подключения \ref{схема}).  Тонкая нить (платиновая проволока) натянута по оси длинной вертикально стоящей медной трубки 1. Через штуцер трубка заполняется исследуемым газом. Нить нагревается электрическим током, ее температура $T_1$ определяется по изменению электрического сопротивления. Трубка находится в кожухе, через который пропускается вода из термостата. Температура воды $T_2$ измеряется термометром, помещенным в термостат. Количество теплоты, протекающей через газ, равно (если пренебречь утечками тепла через торцы) количеству теплоты, выделяемому током в нити, и может быть найдено по закону Джоуля—Ленца. Получается что все величины, входящие в правую часть формулы (\ref{2}), поддаются непосредственному измерению.
+\section*{Задание}
+\textbf{Проведение измерений} \\
+\begin{enumerate}
+    \item Исходя из данных $\Delta t_{max} = 30^oC$, $\kappa \approx 25\;мВт/(м \cdot К)$ и формулы (\ref{2}) получаем $$Q_{max} \approx 400\;мВт$$
+    $$I_{max} = \sqrt{\frac{Q_{max}}{R_н}} \approx 200\;мА$$ \newpage
+    \item наша схема имеет следующий вид:
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/схема.jpeg}
+    \label{схема}
+    \end{figure} \\
+    Максимальное напряжение источника питания $\mathcal{E} = 3.4\;В$ \\
+    Комнатная температура $T_к = 23.0^oC$
+    \item Проводим требуемые измерения: сначала при комнатной температуре $T = 296.2\;К$
+    \begin{center}
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{F4CCCC}}c |
+    >{\columncolor[HTML]{C9DAF8}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |}
+    \hline
+    \multicolumn{1}{|l|}{\cellcolor[HTML]{D9D2E9}$R_э$, Ом} & \multicolumn{1}{l|}{\cellcolor[HTML]{F4CCCC}$I$, мА} & \multicolumn{1}{l|}{\cellcolor[HTML]{C9DAF8}$U$, В} & \multicolumn{1}{l|}{\cellcolor[HTML]{EAD1DC}$Q$, мВт} & \multicolumn{1}{l|}{\cellcolor[HTML]{EAD1DC}$R_н$, Ом} \\ \hline
+    250                                                     & 12.604                                               & 0.255                                              & 3.22                                                  & 20.29                                                  \\ \hline
+    120                                                     & 23.832                                               & 0.484                                             & 11.55                                                 & 20.33                                                  \\ \hline
+    50                                                      & 45.699                                               & 0.936                                              & 42.81                                                 & 20.50                                                  \\ \hline
+    40                                                      & 52.568                                               & 1.082                                               & 56.88                                                 & 20.58                                                  \\ \hline
+    28                                                      & 64.086                                               & 1.328                                              & 85.13                                                 & 20.73                                                  \\ \hline
+    19                                                      & 76.494                                               & 1.600                                              & 122.44                                                & 20.92                                                  \\ \hline
+    12                                                      & 89.789                                               & 1.902                                              & 170.82                                                & 21.19                                                  \\ \hline
+    6                                                       & 105.087                                              & 2.263                                              & 237.87                                                & 21.54                                                  \\ \hline
+    3                                                       & 114.636                                              & 2.497                                              & 286.33                                                & 21.79                                                  \\ \hline
+    3                                                       & 134.146                                              & 3.002                                              & 402.72                                                & 22.38                                                  \\ \hline
+    \end{tabular}%
+    \end{center}
+    \item Значение тока вышло: $I(10\;кОм) = 0.003\;мА$
+    \item Теперь $T = 306.4\;К$
+    \begin{center}
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{F4CCCC}}c |
+    >{\columncolor[HTML]{C9DAF8}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |}
+    \hline
+    $R_э$, Ом & $I$, мА & $U$, В & $Q$, мВт & $R_н$, Ом \\ \hline
+    250       & 12.568  & 0.263 & 3.32     & 20.99     \\ \hline
+    120       & 23.708  & 0.498 & 11.83    & 21.04     \\ \hline
+    80        & 32.577  & 0.687 & 22.38    & 21.09     \\ \hline
+    50        & 45.261  & 0.959 & 43.43    & 21.20     \\ \hline
+    40        & 51.981  & 1.106 & 57.50    & 21.28     \\ \hline
+    28        & 63.188  & 1.353 & 85.54    & 21.42     \\ \hline
+    19        & 75.224  & 1.626 & 122.34   & 21.62     \\ \hline
+    12        & 88.112  & 1.926 & 169.74   & 21.86     \\ \hline
+    8         & 97.494  & 2.151 & 209.78   & 22.07     \\ \hline
+    6         & 102.888 & 2.284  & 235.00   & 22.20     \\ \hline
+    3         & 112.085 & 2.514  & 281.78   & 22.43     \\ \hline
+    1         & 119     & 2.692 & 320.43   & 22.63     \\ \hline
+    4         & 126.755 & 2.896 & 367.11   & 22.85     \\ \hline
+    \end{tabular} 
+    \end{center}
+    Теперь $T = 316.4\;К$
+    \begin{center}
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{F4CCCC}}c |
+    >{\columncolor[HTML]{C9DAF8}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |}
+    \hline
+    $R_э$, Ом & $I$, мА & $U$, В & $Q$, мВт & $R_н$, Ом \\ \hline
+    250       & 12.534  & 0.272  & 3.41     & 21.70     \\ \hline
+    120       & 23.591  & 0.513  & 12.10    & 21.75     \\ \hline
+    80        & 32.361  & 0.706  & 22.83    & 21.80     \\ \hline
+    50        & 44.842  & 0.983  & 44.06    & 21.91     \\ \hline
+    40        & 51.438  & 1.131  & 58.17    & 21.98     \\ \hline
+    28        & 62.383  & 1.380  & 86.11    & 22.13     \\ \hline
+    19        & 74.113  & 1.654  & 122.55   & 22.31     \\ \hline
+    12        & 86.616  & 1.953  & 169.15   & 22.55     \\ \hline
+    8         & 95.691  & 2.176  & 208.22   & 22.74     \\ \hline
+    6         & 100.909 & 2.307  & 232.80   & 22.86     \\ \hline
+    3         & 109.769 & 2.534  & 278.15   & 23.08     \\ \hline
+    1         & 116.456 & 2.710  & 315.56   & 23.27     \\ \hline
+    4         & 123.883 & 2.909  & 360.41   & 23.48     \\ \hline
+    \end{tabular}%
+    \end{center} 
+    Теперь $T = 326.4\;К$
+    \begin{center}
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{F4CCCC}}c |
+    >{\columncolor[HTML]{C9DAF8}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |}
+    \hline
+    $R_э$, Ом & $I$, мА & $U$, В & $Q$, мВт & $R_н$, Ом \\ \hline
+    250       & 12.501  & 0.280  & 3.50     & 22.41     \\ \hline
+    120       & 23.475  & 0.527  & 12.37    & 22.45     \\ \hline
+    80        & 32.146  & 0.723  & 23.25    & 22.50     \\ \hline
+    50        & 44.434  & 1.005  & 44.65    & 22.61     \\ \hline
+    40        & 50.903  & 1.155  & 58.77    & 22.68     \\ \hline
+    28        & 61.603  & 1.406  & 86.61    & 22.82     \\ \hline
+    19        & 73.029  & 1.680  & 122.65   & 23.00     \\ \hline
+    12        & 85.169  & 1.978  & 168.43   & 23.22     \\ \hline
+    8         & 93.952  & 2.199  & 206.59   & 23.40     \\ \hline
+    6         & 98.998  & 2.328  & 230.51   & 23.52     \\ \hline
+    3         & 107.554 & 2.552  & 274.50   & 23.73     \\ \hline
+    1         & 114.007 & 2.725  & 310.67   & 23.90     \\ \hline
+    4         & 121.168 & 2.921  & 353.92   & 24.11     \\ \hline
+    \end{tabular}%
+    \end{center}
+    Теперь $T = 336.3\;К$
+    \begin{center}
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{F4CCCC}}c |
+    >{\columncolor[HTML]{C9DAF8}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |}
+    \hline
+    $R_э$, Ом & $I$, мА & $U$, В & $Q$, мВт & $R_н$, Ом \\ \hline
+    250       & 12.501  & 0.280  & 3.50     & 22.41     \\ \hline
+    120       & 23.475  & 0.527  & 12.37    & 22.45     \\ \hline
+    80        & 32.146  & 0.723  & 23.25    & 22.50     \\ \hline
+    50        & 44.434  & 1.005  & 44.65    & 22.61     \\ \hline
+    40        & 50.903  & 1.155  & 58.77    & 22.68     \\ \hline
+    28        & 61.603  & 1.406  & 86.61    & 22.82     \\ \hline
+    19        & 73.029  & 1.680  & 122.65   & 23.00     \\ \hline
+    12        & 85.169  & 1.978  & 168.43   & 23.22     \\ \hline
+    8         & 93.952  & 2.199  & 206.59   & 23.40     \\ \hline
+    6         & 98.998  & 2.328  & 230.51   & 23.52     \\ \hline
+    3         & 107.554 & 2.552  & 274.50   & 23.73     \\ \hline
+    1         & 114.007 & 2.725  & 310.67   & 23.90     \\ \hline
+    4         & 121.168 & 2.921  & 353.92   & 24.11     \\ \hline
+    \end{tabular}%
+    \end{center} \\
+    \item Блок питания и цифровые мультиметры выключил. На магазине сопротивлений установил максимальное сопротивление 10 кОм. Поставил термостат на охлаждение до комнатной температуры, нек выключив питание термостата.\\ \\
+    \textbf{Обработка результатов измерений} \\
+    \item Построим требуемые графики: 
+    \begin{figure}[h]
+    \begin{center}
+    \begin{minipage}[h]{0.45\linewidth}
+    \includegraphics[width=1\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/t1.png}
+    \caption*{$\frac{dR}{dQ} = (5.26\pm0.02)\;Ом/Вт$ \\ $R_0 = (20.27\pm0.01)\;Ом$}
+    \label{t1} %% метка рисунка для ссылки на него
+    \end{minipage}
+    \hfill
+    \begin{minipage}[h]{0.45\linewidth}
+    \includegraphics[width=1\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/t2.png}
+    \caption*{$\frac{dR}{dQ} = (5.14\pm0.02)\;Ом/Вт$ \\ $R_0 = (20.98\pm0.01)\;Ом$}
+    \label{t2}
+    \end{minipage}
+    \end{center}
+\end{figure} \newpage
+\begin{figure}[h]
+    \begin{center}
+    \begin{minipage}[h]{0.45\linewidth}
+    \includegraphics[width=1\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/t3.png}
+    \caption*{$\frac{dR}{dQ} = (5.00\pm0.02)\;Ом/Вт$ \\ $R_0 = (21.69\pm0.01)\;Ом$}
+    \label{t3} %% метка рисунка для ссылки на него
+    \end{minipage}
+    \hfill
+    \begin{minipage}[h]{0.45\linewidth}
+    \includegraphics[width=1\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/t4.png}
+    \caption*{$\frac{dR}{dQ} = (4.86\pm0.02)\;Ом/Вт$ \\ $R_0 = (22.39\pm0.01)\;Ом$}
+    \label{t4}
+    \end{minipage}
+    \end{center}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/t5.png}
+    \caption*{$\frac{dR}{dQ} = (4.74\pm0.02)\;Ом/Вт$ \\ $R_0 = (23.09\pm0.01)\;Ом$}
+    \label{t5}
+\end{figure}
+    Обобщая все графики, можно сказать тчо $\epsilon_k < 1\%, \epsilon_b < 1\% \Rightarrow$ все графики можно с хорошей точностью считать линейными. \newpage
+    \item Занесем все значения $R_0(T)$ в таблицу и построим график:
+    \begin{center}
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |}
+    \hline
+    $T, ^oC$ & $R_0$, Ом \\ \hline
+    23.0     & 20.27     \\ \hline
+    33.2     & 20.98     \\ \hline
+    43.2     & 21.69     \\ \hline
+    53.2     & 22.39     \\ \hline
+    63.1     & 23.09     \\ \hline
+    \end{tabular}
+    \begin{minipage}[h]{0.5\linewidth}
+    \includegraphics[width=1\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/R(T).png}
+    \label{R0(T)}
+    \end{minipage}
+    \end{center}
+    $$Из\;графика:\;\;\frac{dR}{dT} = (70.35\pm0.10)\;мОм/^oC,\; R_{273} = (18.65\pm0.01)\;Ом \rightarrow$$ 
+    $$\alpha = \frac{1}{R_{273}}\cdot \frac{dR}{dT} = (3.77\pm0.01)\;К\cdot 10^{-3}$$
+    Линейность: $\epsilon_{\frac{dR}{dT}} < 1\% \Rightarrow$ график с хорошей точностью линейный
+    \item Из лабника: 
+    \begin{equation}\label{3}
+        \frac{dQ}{d(\Delta T)} = \frac{dR}{dT}/\frac{dR}{dQ}
+    \end{equation}
+    Подставим в (\ref{3}) отношение $\frac{dQ}{d(\Delta T)}$ из (\ref{2}) и получим:
+    \begin{equation}\label{4}
+        \frac{2\pi L}{\ln \frac{r_0}{r_1}}\cdot \kappa =  \frac{dR}{dT}/\frac{dR}{dQ} \Rightarrow
+    \end{equation}
+    \begin{equation}\label{5}
+        \kappa = \frac{dR}{dT}/\frac{dR}{dQ} \cdot \frac{\ln \frac{r_0}{r_1}}{2\pi L}
+    \end{equation}
+    Построим таблицу в которой для каждой из исследуемых температур рассчитаем значение $\kappa$ по формуле (\ref{5}), где значения $r_0 = (3.5\pm0.05)\;мм,\;r_1 = (25\pm2)\;мкм,\; L = (400\pm2)\;мм $
+    \begin{center}
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{F4CCCC}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |
+    >{\columncolor[HTML]{CFE2F3}}c |}
+    \hline
+    $T,^oC$ & $\frac{dR}{dQ},\;Ом/Вт$ & $\kappa,\;мВт/^oC\cdot м$ & $\Delta \kappa,\;мВт/^oC\cdot м$ \\ \hline
+    23.0                      & 5.26                                                     & 26.30                                                             & 0.321                                                                                   \\ \hline
+33.2                    & 5.14                                                     & 26.91                                                             & 0.328                                                                                   \\ \hline
+43.2                    & 5.00                                                        & 27.66                                                             & 0.338                                                                                   \\ \hline
+53.2                    & 4.86                                                     & 28.46                                                             & 0.347                                                                                   \\ \hline
+63.1                    & 4.74                                                     & 29.18                                                             & 0.356                                                                                   \\ \hline
+
+    \end{tabular}
+    \end{center} \newpage
+    \item Строим требуемый график $\kappa(T)$:
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/kappa(T)+real.png}
+    \caption*{\href{http://thermalinfo.ru/svojstva-gazov/gazovye-smesi/teploprovodnost-vozduha-v-zavisimosti-ot-temperatury-i-davleniya}{данные про $\kappa_{real}$ взяты отсюда}}
+    \label{kappa(T)+real}
+    \end{figure}
+    Из графиков получаем: 
+    $$\frac{d\kappa}{dT} = (72.9\pm1.7)\;мкВт/^oC^2\cdot м$$
+    $$\frac{d\kappa_{real}}{dT} = (78\pm2)\;мкВт/^oC^2\cdot м$$
+    $$\left( 1 - \frac{d\kappa}{dT} / \frac{d\kappa_{real}}{dT} \right) \cdot 100\% = 6.5\% $$
+    Исходя из всех полученных данных полученные нами значения близки к правде. 
+    Проверка делается с помощью линейного приближения, потому что $60 - 20 \ll 300\;(град)$ и приближение прямой имеет смысл для этой цели. \newpage
+    Теперь строим логарифмированный график:
+    \begin{figure}[h]
+    \begin{tabular}{|
+    >{\columncolor[HTML]{D9D2E9}}c |
+    >{\columncolor[HTML]{EAD1DC}}c |}
+    \hline
+    $\ln T$ & $\ln \kappa$ \\ \hline
+    5.691    & 3.269        \\ \hline
+    5.725    & 3.293        \\ \hline
+    5.757    & 3.320        \\ \hline
+    5.788    & 3.349        \\ \hline
+    5.818    & 3.374        \\ \hline
+    \end{tabular}
+    \centering
+    \includegraphics[width=0.6\linewidth]{2.2.3 Измерение теплопроводности воздуха при атмосферном давлении/картинки/lnKappa(lnT).png}
+    \label{lnKappa(lnT)}
+    \end{figure} \\
+    Из графика: 
+    $$\frac{d(\ln \kappa)}{d(\ln T)} = \beta = (0.84\pm0.02)$$
+\end{enumerate}
+
+\section*{Вывод}
+В теории говориться про вклад излучения из закона Стефана-Больцмана, давайте же оценим его величину: 
+\begin{equation}
+    Q_{излучения} = \epsilon S \sigma_S (T^4_1 - T^4_0) \approx 4 \epsilon S \sigma_S T^3_0 \Delta T
+\end{equation}
+Значение которые будем использовать в рассчетах $\sigma_S = 5.67 \cdot 10^{-8}$ Вт/(м$^2$ К$^4$), $\epsilon = 0.15$, $S = 2\pi r L = 0.63$ см$^2$, $<T_0> = 315$ К, $<\Delta T> \approx 20$ К
+\begin{equation*}
+    <Q_{излучения}>\; \approx 1\; мВт, 
+\end{equation*}
+Отсюда можно сделать вывод что вклад такого излучения очень мал, так как $\frac{<Q_{излучения}>}{<Q>} \approx 0.005$. \\ \\
+
+Из графика $\kappa(T)$ и $\kappa_{real}(T)$ можно сделать что полученные нами данные очень похожи на правду (\ref{kappa(T)+real})
+
+\end{document}

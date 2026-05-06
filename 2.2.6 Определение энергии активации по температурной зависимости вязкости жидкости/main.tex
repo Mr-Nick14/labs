@@ -1,0 +1,219 @@
+\documentclass[12 pt, a4paper]{article}% тип документа, размер шрифта
+\usepackage{cmap}	
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+\usepackage{mathtext}
+\usepackage[T2A]{fontenc}%поддержка кириллицы в ЛаТеХ
+\usepackage[utf8]{inputenc}%кодировка
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{amsmath}%удобная вёрстка многострочных формул, масштабирующийся текст в формулах, формулы в рамках и др.
+\usepackage{amsfonts}%поддержка ажурного и готического шрифтов — например, для записи символа {\displaystyle \mathbb {R} } \mathbb {R} 
+\usepackage{amssymb}%amsfonts + несколько сотен дополнительных математических символов
+\frenchspacing%запрет длинного пробела после точки
+\usepackage{setspace}%возможность установки межстрочного интервала
+\usepackage{indentfirst}%пакет позволяет делать в первом абзаце после заголовка абзацный отступ
+\onehalfspacing%установка полуторного интервала по умолчанию
+\usepackage{graphicx}%подключение рисунков
+\graphicspath{{images/}}%путь ко всем рисункам
+\usepackage{caption}
+\usepackage{float}%плавающие картинки
+\usepackage{tikz} % это для чудо-миллиметровки
+\usepackage{pgfplots}%для построения графиков
+\pgfplotsset{compat=newest, y label style={rotate=-90},  width=10 cm}%версия пакета построения графиков, ширина графиков
+\usepackage{pgfplotstable}%простое рисование табличек
+\usepackage{lastpage}%пакет нумерации страниц
+\usepackage{comment}%возможность вставлять большие комменты
+\usepackage{python}%питончик
+\usepackage{float}
+%%%%% ПОЛЯ
+\setlength\parindent{0pt} 
+\usepackage[top = 2 cm, bottom = 2 cm, left = 1.5 cm, right = 1.5 cm]{geometry}
+\setlength\parindent{0pt}
+%%%%% КОЛОНТИТУЛЫ
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{fancybox, fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[L]{Легких Никита Б05-301}
+\fancyhead[C]{2.2.6}
+% ЛЮБАЯ ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ
+\fancyfoot[R]{ФПМИ МФТИ}
+\renewcommand{\footrulewidth}{0.3 mm}
+ 
+
+\usepackage{graphicx}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage{wrapfig}
+%%% Заголовок
+%%% Новые команды
+\newcommand{\z}[2]{{{\vspace{0.6cm} \textbf{{Задача {#1}}} \textit{{#2}\\ }}} }
+\newcommand{\otv}{{\vspace{0.3cm} \textbf{Ответ: }}}
+\newcommand{\uk}{\underline{\textit{Указание.}} }
+\newcommand{\prim}{\underline{\textit{Примечание.}} }
+\newcommand{\sol}[1]{{{\vspace{0.3cm} \textbf{{Задача {#1}} }\\ }}}
+
+
+
+\begin{document} % конец преамбулы, начало документа
+
+\begin{center}
+\section*{Работа 2.2.6}
+    \section*{Определение энергии активации по температурной зависимости вязкости жидкости}
+\end{center}
+\textbf{Цель работы:} 1) измерение скорости падения шариков при разной температуре жидкости; 2) вычисление вязкости жидкости по закону Стокса и расчет энергии активации. \\ \\
+\textbf{В работе используются:} стеклянный цилиндр с исследуемой жидкостью (глицерин); термостат; секундомер; горизонтальный компаратор; микроскоп; мелкие шарики (диаметром около 1 мм).
+\section*{Теоретическая справка}
+Заметим некоторые особенности жидкости: 
+\begin{itemize}
+    \item жидкость обладает некоторыми свойствами газов и твердых тел: подобно газам, жидкости принимают форму сосуда, в котором они находятся, подобно твердым телам, они обладают сравнительно большой плотностью, с трудом поддаются сжатию.
+    \item В жидкостях, как и в кристаллах, каждая молекула находится в потенциальной яме электрического поля, создаваемого окружающими молекулами
+    \item  Глубина потенциальной ямы в жидкостях больше средней кинетической энергии колеблющейся молекулы, поэтому молекулы колеблются вокруг более или менее стабильных положений равновесия. Однако у жидкостей различие между этими двумя энергиями невелико, так что молекулы нередко выскакивают из «своей» потенциальной ямы и занимают место в другой.
+    \item В жидкости присутствует ближний, но не дальний порядок.
+\end{itemize}
+Энергия актвации ($W$) - необходимая энергия для перехода молекулы из одного устойчивого состояния в другое. \\
+Из распределени Больцмана: $n \sim e^{-W/kT} \Rightarrow \eta \sim A\cdot e^{W/kT}$ \\
+\textbf{Формула Стокса} В нашем случае, очевидно, что сила сопротивления зависит от $\eta, r, \rho_{liq}, v$. Закон будет искать методов размерностей с помощью степенной формулы: $$F = A \eta^x r^y \rho_{liq}^z v^{\alpha}.$$ В общем виде система не имеет рещений, потому что уранвения только 3, а неизвестных 4, поэтому положим то что при наших измерениях скорости достаточно малы и будет считать $\alpha = 1$. Далее решаем систему уравнений: 
+\begin{equation*}
+ \begin{cases}
+   1 = z + x
+   \\
+   1 = -x + 1 + y - 3z
+   \\
+   -2 = -x - 1
+ \end{cases}
+\end{equation*} и получаем: $x = 1 = y, z = 0 \Rightarrow$ $F = A \eta r v$, из строго решения получаем $A = 6\pi$. Итого: $F = 6\pi \eta r v$. \\
+Нам также важно понимать, будет ли предположение о малой скорости верно, для этого надо оценивать значение числа Рейнольдса: $Re = \frac{\rho r v}{\eta}$, для того чтобы поток был достаточно ламинарным $Re < 10$.
+
+Запишем второй закон Ньютона: $$Vg(\rho - \rho_{liq}) - 6\pi \eta r v = V\rho \frac{dv}{dt} \Rightarrow$$ $$v(t) = v(\infty) - [v(\infty) + v(0)]\cdot e^{-t / T}$$ 
+$v(0)$ - начальная скорость \\
+$v(\infty) = \frac{2}{9} g r^2 \frac{\rho - \rho_{liq}}{\eta}$ - установившаясь скорость \\ 
+$\tau = \frac{V\rho}{6\pi \eta r} = \frac{2 r^2 \rho}{9 \eta}$ \\ 
+$S = v(\infty) \tau \cdot (\frac{t}{\tau} - 1 + e^{-t/T})$ \\
+Если $t > 5\tau$, то процесс можно считать установившимся.
+\section*{Задание}
+Значения установки: плотность стали - $\rho_1 = 7800$ кг/м$^3$, плотность стекла - $\rho_2 = 2600$ кг/м$^3$.
+$L = (10\pm0.3)$ см \\
+$D = (4\pm0.5)$ см \\
+$\rho_{liq}(T) = \frac{571}{450} - 4.(4)\cdot10^{-4} \cdot T$ \\ 
+$\eta = \frac{2}{9} g r^2 \frac{\rho - \rho_{liq}}{v(\infty)} \approx \frac{2}{9} g r^2 \frac{\rho - \rho_{liq}}{L} t$ \\
+\prim  Шарики под номерами 1 и 2 - всегда стеклянные, а под 3 и 4 - всегда железные
+\begin{enumerate}
+    \item $T = 24.41 ^oC \rightarrow \rho_{liq} = 1.258$ г/см$^3$
+    \begin{table}[h!] 
+   \begin{center}
+    \begin{tabular}{|*{11}{l|}} \hline
+     $N$ & $d_1$, мм  & $d_2$, мм & $d_3$, мм & $<d>$, мм & $t_1$, c & $t_2$, c & $\eta_1$, Па$\cdot$с & $\eta_2$, Па$\cdot$с & $\eta$, Па$\cdot$с & $\delta\eta$, Па$\cdot$с \\ \hline
+     1 & 2.02 & 2.04 & 2.00 & 2.02 & 23.8 & 25.8 & 77.3 & 78.7 & 78 & 0.5 \\ \hline
+     2 & 2.14 & 2.18 & 2.13 & 2.15 & 23.3 & 24.9 & 75.1 & 77.0 & 76 & 1.0\\ \hline
+     3 & 0.64 & 0.62 & 0.63 & 0.63 & 27.8 & 29.2 & 48.7 & 49.3 & 49 & 0.3\\
+     \hline
+     4 & 0.75 & 0.73 & 0.74 & 0.74 & 25.8 & 27.7 & 46.0 & 44.0 & 45 & 1.0\\
+     \hline
+    \end{tabular}
+   \end{center}
+  \end{table} \\
+  $Re_1 = \frac{\rho_{liq} r_1 v}{\eta} = \frac{\rho_{liq} r_1 L}{\eta t} \approx 1.6\cdot10^{-7} $,
+  $Re_2 = \frac{\rho_{liq} r_2 v}{\eta} = \frac{\rho_{liq} r_2 L}{\eta t} \approx 8\cdot10^{-7} \Rightarrow$ течение ламинарное
+  $\tau = \frac{2 <r>^2 \rho_{liq}}{9 \eta} \approx 2$ нс $\Rightarrow$ можно считать что движение почти сразу установившееся
+  \item $T = 30.80 ^oC \rightarrow \rho_{liq} = 1.255$ г/см$^3$
+    \begin{table}[h!] 
+   \begin{center}
+    \begin{tabular}{|*{11}{l|}} \hline
+     $N$ & $d_1$, мм  & $d_2$, мм & $d_3$, мм & $<d>$, мм & $t_1$, c & $t_2$, c & $\eta_1$, Па$\cdot$с & $\eta_2$, Па$\cdot$с & $\eta$, Па$\cdot$с & $\delta\eta$, Па$\cdot$с \\ \hline
+     1 & 2.10 & 2.12 & 2.12 & 2.11 & 14.7 & 15.4 & 47.4 & 48.7 & 48 & 0.5 \\ \hline
+     2 & 2.10 & 2.10 & 2.10 & 2.10 & 15.3 & 16.2 & 50.8 & 49.2 & 50 & 0.8\\ \hline
+     3 & 0.70 & 0.80 & 0.74 & 0.75 & 14.1 & 14.7 & 24.3 & 25.7 & 25 & 0.6\\
+     \hline
+     4 & 0.74 & 0.76 & 0.75 & 0.75 & 19.4 & 19.3 & 33.0 & 35.3 & 34 & 1.1\\
+     \hline
+    \end{tabular}
+   \end{center}
+  \end{table} \\
+  $Re_1 = \frac{\rho_{liq} r_1 v}{\eta} = \frac{\rho_{liq} r_1 L}{\eta t} \approx 2.3\cdot10^{-7} $,
+  $Re_2 = \frac{\rho_{liq} r_2 v}{\eta} = \frac{\rho_{liq} r_2 L}{\eta t} \approx 5\cdot10^{-7} \Rightarrow$ течение ламинарное
+  $\tau = \frac{2 <r>^2 \rho_{liq}}{9 <\eta>} \approx 2$ нс $\Rightarrow$ можно считать что движение почти сразу установившееся
+  \item $T = 35.04 ^oC \rightarrow \rho_{liq} = 1.253$ г/см$^3$
+    \begin{table}[h!] 
+   \begin{center}
+    \begin{tabular}{|*{11}{l|}} \hline
+     $N$ & $d_1$, мм  & $d_2$, мм & $d_3$, мм & $<d>$, мм & $t_1$, c & $t_2$, c & $\eta_1$, Па$\cdot$с & $\eta_2$, Па$\cdot$с & $\eta$, Па$\cdot$с & $\delta\eta$, Па$\cdot$с \\ \hline
+     1 & 2.04 & 2.06 & 2.04 & 2.06 & 12.3 & 12.0 & 39.5 & 40.5 & 40 & 0.5 \\ \hline
+     2 & 2.10 & 2.08 & 2.10 & 2.09 & 11.1 & 11.9 & 35.2 & 36.9 & 36 & 0.8\\ \hline
+     3 & 0.72 & 0.70 & 0.72 & 0.72 & 22.8 & 25.0 & 30.3 & 25.1 & 27 & 2.2\\
+     \hline
+     4 & 0.70 & 0.72 & 0.74 & 0.72 & 15.8 & 16.3 & 33.0 & 35.3 & 28 & 0.3\\
+     \hline
+    \end{tabular}
+   \end{center}
+  \end{table} \\
+  $Re_1 = \frac{\rho_{liq} r_1 v}{\eta} = \frac{\rho_{liq} r_1 L}{\eta t} \approx 5.6\cdot10^{-7} $,
+  $Re_2 = \frac{\rho_{liq} r_2 v}{\eta} = \frac{\rho_{liq} r_2 L}{\eta t} \approx 6.3\cdot10^{-7} \Rightarrow$ течение ламинарное
+  $\tau = \frac{2 <r>^2 \rho_{liq}}{9 <\eta>} \approx 1$ нс $\Rightarrow$ можно считать что движение почти сразу установившееся
+  \item $T = 39.75 ^oC \rightarrow \rho_{liq} = 1.251$ г/см$^3$
+    \begin{table}[h!] 
+   \begin{center}
+    \begin{tabular}{|*{11}{l|}} \hline
+     $N$ & $d_1$, мм  & $d_2$, мм & $d_3$, мм & $<d>$, мм & $t_1$, c & $t_2$, c & $\eta_1$, Па$\cdot$с & $\eta_2$, Па$\cdot$с & $\eta$, Па$\cdot$с & $\delta\eta$, Па$\cdot$с \\ \hline
+     1 & 2.00 & 2.08 & 2.08 & 2.05 & 8.58 & 9.07 & 27.5 & 28.7 & 28 & 0.5 \\ \hline
+     2 & 2.10 & 2.10 & 2.10 & 2.10 & 8.87 & 9.01 & 29.0 & 29.3 & 29 & 0.2\\ \hline
+     3 & 0.76 & 0.76 & 0.76 & 0.76 & 8.57 & 9.70 & 13.8 & 16.4 & 15 & 1.5\\
+     \hline
+     4 & 0.70 & 0.72 & 0.74 & 0.72 & 12.10 & 12.67 & 19.7 & 20.3 & 20 & 0.3\\
+     \hline
+    \end{tabular}
+   \end{center}
+  \end{table} \\
+  $Re_1 = \frac{\rho_{liq} r_1 v}{\eta} = \frac{\rho_{liq} r_1 L}{\eta t} \approx 7\cdot10^{-7} $,
+  $Re_2 = \frac{\rho_{liq} r_2 v}{\eta} = \frac{\rho_{liq} r_2 L}{\eta t} \approx 9.1\cdot10^{-7} \Rightarrow$ течение ламинарное
+  $\tau = \frac{2 <r>^2 \rho_{liq}}{9 <\eta>} \approx 1$ нс $\Rightarrow$ можно считать что движение почти сразу установившееся
+  \item $T = 44.67 ^oC \rightarrow \rho_{liq} = 1.249$ г/см$^3$
+    \begin{table}[h!] 
+   \begin{center}
+    \begin{tabular}{|*{11}{l|}} \hline
+     $N$ & $d_1$, мм  & $d_2$, мм & $d_3$, мм & $<d>$, мм & $t_1$, c & $t_2$, c & $\eta_1$, Па$\cdot$с & $\eta_2$, Па$\cdot$с & $\eta$, Па$\cdot$с & $\delta\eta$, Па$\cdot$с \\ \hline
+     1 & 2.10 & 2.12 & 2.12 & 2.12 & 6.33 & 5.75 & 27.5 & 28.7 & 20 & 0.5 \\ \hline
+     2 & 2.10 & 2.10 & 2.10 & 2.10 & 5.88 & 6.05 & 29.0 & 29.3 & 19 & 0.2\\ \hline
+     3 & 0.70 & 0.80 & 0.74 & 0.75 & 8.24 & 8.34 & 14.8 & 15.4 & 14 & 0.3\\
+     \hline
+     4 & 0.74 & 0.76 & 0.76 & 0.76 & 7.87 & 7.52 & 19.7 & 20.3 & 13 & 0.3\\
+     \hline
+    \end{tabular}
+   \end{center}
+  \end{table} \\
+  $Re_1 = \frac{\rho_{liq} r_1 v}{\eta} = \frac{\rho_{liq} r_1 L}{\eta t} \approx 7\cdot10^{-7} $,
+  $Re_2 = \frac{\rho_{liq} r_2 v}{\eta} = \frac{\rho_{liq} r_2 L}{\eta t} \approx 9.1\cdot10^{-7} \Rightarrow$ течение ламинарное
+  $\tau = \frac{2 <r>^2 \rho_{liq}}{9 <\eta>} \approx 1$ нс $\Rightarrow$ можно считать что движение почти сразу установившееся
+\end{enumerate}
+
+\textbf{Линеаризация и график} \\
+Вспоминаем формулу $\eta \sim A\cdot e^{W/kT}$, для нее очевидно линеаризация для нахождения $W \rightarrow$ \\ $\ln{\eta}$ от $\frac{1}{T}$, построим график: 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{2.2.6 Определение энергии активации по температурной зависимости вязкости жидкости/график 1.png}
+\label{fig:mpr}
+\end{figure}
+
+Из графика получаем значения: $$k_{стекла} = \frac{W}{k} = 5.8 \; К\cdot10^3$$
+$$k_{сталь} = \frac{W}{k} = 6.5 \; К\cdot10^3$$
+Погрешность же оценим в помощью МНК включив в нее приборную погрещность, потому что кресты погрешностей слишком малы более точную оценку даст именно такой метод.\\
+Стальные шарики: 
+$$\Delta k_{МНК} = \sqrt{\frac{<\ln(\eta)^2>-<\ln(\eta)>^2}{<1/T^2>-<1/T>^2}-k^2}/\sqrt{N} = 0.4 \; К\cdot10^3$$ $$\Delta k_{стат} = \frac{<\delta \eta>}{<\eta>}\cdot <k> = 0.3\; К\cdot10^3$$
+$$\Delta k_{сталь} = \sqrt{\Delta k_{МНК}^2 + \Delta k_{стат}^2} = 0.5 \; К\cdot10^3$$
+Стеклянные шарики: 
+$$\Delta k_{МНК} = \sqrt{\frac{<\ln(\eta)^2>-<\ln(\eta)>^2}{<1/T^2>-<1/T>^2}-k^2}/\sqrt{N} = 0.4 \; К\cdot10^3$$ $$\Delta k_{стат} = \frac{<\delta \eta>}{<\eta>}\cdot <k> = 0.2\; К\cdot10^3$$
+$$\Delta k_{стекло} = \sqrt{\Delta k_{МНК}^2 + \Delta k_{стат}^2} = 0.4 \; К\cdot10^3$$
+Итого: $$k_{сталь} = 6.5\; К\cdot10^3 \Rightarrow W_{сталь} = k_{сталь} \cdot k = 0.55\; эВ$$
+$$\Delta k_{сталь} = 0.5\; К\cdot10^3 \Rightarrow \Delta W_{сталь} = W_{сталь} \cdot \epsilon_{k_{сталь}} =  0.04 \;эВ$$
+$$k_{стекло} = 5.8\; К\cdot10^3 \Rightarrow W_{стекло} = k_{стекло} \cdot k = 0.50 \;эВ$$
+$$\Delta k_{стекло} = 0.4\; К\cdot10^3 \Rightarrow \Delta W_{стекло} = W_{стекло} \cdot \epsilon_{k_{стекло}} =  0.03 \;эВ$$
+\section*{Вывод}
+Мы получили ответы: $W_{сталь} = 0.55\pm0.04 \; эВ$ и $W_{стекло} = 0.5\pm0.03 \; эВ$, в ворота каждого из которых попадает значение взятое из справочных материалов: $W_{справ} = 0.52 \; эВ$, и которые между собой отличаются лишь на $(\frac{W_{сталь}}{W_{стекло}} - 1) / 100 = 10\%$.
+\end{document}
