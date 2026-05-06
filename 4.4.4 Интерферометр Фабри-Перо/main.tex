@@ -1,0 +1,346 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfplots}
+\usepackage[unicode, pdftex]{hyperref}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amsfonts,amsthm, mathtools}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{wrapfig}
+\usepackage{floatrow}
+\usepackage{setspace}
+\usepackage[headings]{fancyhdr}
+\usepackage[margin=10pt,font={small,stretch=0,9},labelfont=bf,labelsep=period,
+justification=centerlast]{caption}
+\usepackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{longtable}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{icomma}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+\usepackage{soulutf8} 
+\usepackage{etoolbox} 
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[normalem]{ulem}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg}
+\usepackage{indentfirst}
+\usepackage[T2A]{fontenc}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{multicol}
+\usepackage{lastpage}
+
+\pgfplotsset{
+  MyStyle1/.style={
+    axis lines = middle,
+    enlargelimits = true,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    minor tick num=5,
+    enlargelimits=0.05,
+    ticklabel style={font=\tiny,fill=white},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south east},
+  }
+}
+\def\Slope{1.5}
+\def\Intercept{-20}
+
+
+% Настройка отчёркиваний и нумерации
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\nouppercase{\leftmark\hfill}}
+\fancyfoot[RO, RE]{Страница \thepage \ из \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+	\textit{Федеральное государственное автономное образовательное\\ учреждение высшего образования }
+	
+	\vspace{0.5ex}
+	
+	\textbf{«Московский физико-технический институт\\ (национальный исследовательский университет)»}
+\end{center}
+
+\vspace{10ex}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width = 0.8\textwidth]{MIPT.png}
+  \end{center}
+\end{figure}
+
+\begin{center}
+	
+	\textbf{Лабораторная работа № 4.4.4}
+	
+	\vspace{1ex}
+	
+	по курсу общей физики
+	
+	на тему:
+	
+	\textbf{\textit{<<Интерферометр Фабри-Перо>>}}
+	
+	\vspace{20ex}
+	
+	\begin{flushright}
+		\noindent
+		\textit{Работу выполнил:}\\  
+		\textit{Легких Никита \\(группа Б05-301)}
+	\end{flushright}
+	\vfill
+	Долгопрудный \\ \today
+	\setcounter{page}{1}
+\end{center}
+\newpage
+
+% Конец шаблона
+\newpage
+
+\section*{Введение}
+\textbf{Цель работы:} определение спектральных характеристик интерферометра Фабри-Перо на основании наблюдаемых дифракционных колец ртутной лампы.\\
+\textbf{В работе используются:}  интерферометр Фабри-Перо, линзы, светофильтры, ртутная лампа, катетометр КН-6.
+\section*{Экспериментальная установка}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.86\textwidth]{pics/ustanovka.png}
+    \caption{Схема экспериментальной установки}
+\end{figure}
+На схеме $S$ --- лампа, $ Л_0 $ --- линза, $ C $ --- светофильтр, ИФП --- интерферометр
+Фабри-Перо, $T$ --- зрительная труба. Диаметры колец измеряются с помощью микроскопа
+катетометра.\\
+Цена деления катетометра КН-6 составляет $0,001$ мм, однако в лабораторной работе мы измеряли с точностью до десятых, так же, в силу погрешности при измерении середины кольца, примем $\Delta = 0,01$ мм.
+\section*{Ход работы}
+Проведём требуемые измерения на ртутной лампе, меняя светофильтр и записывая координаты соответствующих колец. Всего удалось измерить зелёную и две жёлтые линии, по пять измерений на каждую. Полученные данные внесём в таблицы ниже:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+$x^{\text{up}}$, мм & $x^{\text{down}}$, мм & $d$, мм \\ \hline
+199,86 & 165,04 & 34,82 \\ \hline
+198,11 & 166,86 & 31,25 \\ \hline
+195,95 & 169,12 & 26,83 \\ \hline
+193,52 & 171,28 & 22,24 \\ \hline
+190,22 & 175,03 & 15,19 \\ \hline
+\end{tabular}
+\caption{Измерения для зелёной линии}
+\end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$x^{\text{up}}$, мм & $x^{\text{down}}$, мм & $d$, мм & $x^{\text{up}}$, мм & $x^{\text{down}}$, мм & $d$, мм\\ \hline
+200,56 & 164,40 & 36,16 & 199,92 & 165,20 & 34,72 \\ \hline
+198,74 & 166,09 & 32,65 & 198,00 & 167,02 & 30,98 \\ \hline
+196,55 & 168,45 & 28,10 & 195,75 & 169,31 & 26,44 \\ \hline
+194,00 & 171,00 & 23,00 & 193,00 & 172,09 & 20,91 \\ \hline
+191,04 & 174,26 & 16,78 & 189,20 & 175,78 & 13,42 \\ \hline
+\end{tabular}
+\caption{Измерения для жёлтых линий}
+\end{table}
+Погрешность прямых измерений ($x^{\text{up}}$ и $x^{\text{down}}$) совпадает с погрешностью катетометра $\sigma = 0,01$ мм, погрешность же $d = x^{\text{up}}-x^{\text{down}}$ равна $\sigma_d = 0,02$ мм.\\
+Построим зависимость квадрата диаметра от номера кольца $d^2(n)$. Для этого проведем предварительную обработку данных:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|cc|cc|cc|}
+\hline
+  & \multicolumn{2}{c|}{Зел. ($\lambda = 546,07$ нм)}                  & \multicolumn{2}{c|}{Жел. ($\lambda = 579,07$ нм)}               & \multicolumn{2}{c|}{Жел. ($\lambda = 576,96$ нм)}               \\ \hline
+$n$ & \multicolumn{1}{c|}{$d^2$}       & $\sigma_{d^2}$ & \multicolumn{1}{c|}{$d^2$}       & $\sigma_{d^2}$ & \multicolumn{1}{c|}{$d^2$}       & $\sigma_{d^2}$ \\ \hline
+1 & \multicolumn{1}{c|}{230,74}  & 0,43  & \multicolumn{1}{c|}{281,57}  & 0,47  & \multicolumn{1}{c|}{180,10}  & 0,38  \\ \hline
+2 & \multicolumn{1}{c|}{494,62}  & 0,63  & \multicolumn{1}{c|}{529,00}  & 0,65  & \multicolumn{1}{c|}{437,23}  & 0,59  \\ \hline
+3 & \multicolumn{1}{c|}{719,85}  & 0,76  & \multicolumn{1}{c|}{789,61}  & 0,79  & \multicolumn{1}{c|}{699,07}  & 0,75  \\ \hline
+4 & \multicolumn{1}{c|}{976,56}  & 0,88  & \multicolumn{1}{c|}{1066,02} & 0,92  & \multicolumn{1}{c|}{959,76}  & 0,88  \\ \hline
+5 & \multicolumn{1}{c|}{1212,43} & 0,98  & \multicolumn{1}{c|}{1307,55} & 1,02  & \multicolumn{1}{c|}{1205,48} & 0,98  \\ \hline
+\end{tabular}
+\caption{Обработка данных}
+\end{table}
+На основании этого построим соответствующие графики:
+
+График для $\lambda = 546.07$ нм:
+\begin{minipage}{0.6\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=1\textwidth,
+          height=,
+          xlabel={$n$},
+          ylabel={$d^2,$ мм$^2$},
+          MyStyle1,
+          ]
+          \draw[blue, domain=0:20] plot (\x,244.48000000000005*\x-6.5480000000001155);
+          \addplot [only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=n, y=1d,
+                x error minus=null, x error plus=null, y error minus=delta1d, y error plus=delta1d, col sep=comma] {all.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}
+
+График для $\lambda = 549.07$ нм:
+\begin{minipage}{0.6\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=1\textwidth,
+          height=,
+          xlabel={$n$},
+          ylabel={$d^2,$ мм$^2$},
+          MyStyle1,
+          ]
+          \draw[blue, domain=0:20] plot (\x,258.8980000000001*\x+18.055999999999813);
+          \addplot [only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=n, y=2d,
+                x error minus=null, x error plus=null, y error minus=delta2d, y error plus=delta2d, col sep=comma] {all.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}
+
+График для $\lambda = 576.96$ нм:
+\begin{minipage}{0.6\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=1\textwidth,
+          height=,
+          xlabel={$n$},
+          ylabel={$d^2,$ мм$^2$},
+          MyStyle1,
+          ]
+          \draw[blue, domain=0:20] plot (\x,257.329*\x-75.6590000000001);
+          \addplot [only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=n, y=1d,
+                x error minus=null, x error plus=null, y error minus=delta1d, y error plus=delta1d, col sep=comma] {all.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}
+
+С помощью МНК найдем угловые коэффициенты соответствующих зависимостей и, исходя из них, по формулам: $\frac{\lambda}{L} = \frac{k}{4 f^2}$ и $\Delta L =\frac{\Delta k}{k} \cdot L$, где $f = 110$ мм - фокусное расстояние линзы, оценим базу интерферометра $L$:\\
+$k_1 = (247,9 \pm 2,3)$ $\text{мм}^2$ $\Rightarrow$ $L_1 = (0,1081 \pm 0,0014)$ мм\\
+$k_2 = (258,9 \pm 3)$ $\text{мм}^2$ $\Rightarrow$ $L_2 = (0,1083 \pm 0,0013)$ мм\\
+$k_3 = (257,3 \pm 1,6)$ $\text{мм}^2$ $\Rightarrow$ $L_3 = (0,1085 \pm 0,0007)$ мм\\
+Как видно, значения $L$ сходятся с очень хорошей точностью в пределах доверительных интервалов. Усреднив эти результаты, получим $L = (0,1083 \pm 0,0011)$ мм, что достаточно близко к теоретическому значению $L_{\text{теор}} = 0,1$ мм.\\
+Также посчитаем $d_{\text{ср}}$ для желтого дублета и построим график зависимости $d_{\text{ср}}(1/\Delta d)$:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$n$ & $d_{\text{ср}}$, мм & $1/\Delta d$, $\text{мм}^{-1}$ & $\sigma_{1/\Delta d}$, $\text{мм}^{-1}$ \\ \hline
+1 & 15,100 & 0,298 & 0,004 \\ \hline
+2 & 21,955 & 0,478 & 0,009 \\ \hline
+3 & 27,270 & 0,602 & 0,015 \\ \hline
+4 & 31,815 & 0,599 & 0,014 \\ \hline
+5 & 35,440 & 0,694 & 0,019 \\ \hline
+\end{tabular}
+\caption{Обработка данных для жёлтого дублета}
+\end{table}
+График для желтого дуплета:
+\begin{minipage}{0.6\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=1\textwidth,
+          height=,
+          xlabel={$\frac{1}{\Delta d}$, мм$^{-1}$},
+          ylabel={$d_{\text{ср}},$ мм},
+          MyStyle1,
+          ]
+          \draw[blue, domain=0:3] plot (\x,51.17172022538402*\x-1.01993294440015);
+          \addplot [only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=1_d, y=d,
+                x error minus=delta1_d, x error plus=delta1_d, y error minus=null, y error plus=null, col sep=comma] {duplet.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}
+
+С помощью МНК найдем угловой коэффициент зависимости и, исходя из него, по формуле $k = \frac{4 f^2 \Delta \lambda}{\lambda}$ оценим разность длины волн для жёлтого дублета $\Delta \lambda$:\\
+$k = (52,2 \pm 7,3)$ $\Rightarrow$ $\Delta \lambda = (0,62 \pm 0,14)$ нм\\
+Как видно, это значение близко к теоретическому: $\Delta \lambda_{\text{теор}} = 2,11$ нм по порядку величины, однако всё же не сходится с ним в пределах доверительного интервала. Также стоит отметить, что точность данного метода низка - $\varepsilon = 23 \%$. Таким образом, данный метод подходит скорее для оценки порядка величины, нежели для получения точного значения.\\
+На основании полученных значений оценим экспериментальное и теоретическое значения линейной дисперсии интерферометра с помощью следующих формул:
+\begin{equation*}
+    D_{\text{эксп}} = \frac{\Delta D}{2 \Delta \lambda} \text{ мм/}{\text{\AA}}
+\end{equation*}
+\begin{equation*}
+    D_{\text{теор}} = \frac{2f^2}{\lambda D} \text{ мм/}{\text{\AA}}
+\end{equation*}
+Полученные данные внесем в таблицу ниже:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$D_{\text{эксп}}$, \text{мм/}{\text{\AA}} & $\sigma_{D_{\text{эксп}}}$, \text{мм/}{\text{\AA}} & $D_{\text{теор}}$, \text{мм/}{\text{\AA}} & $\sigma_{D_{\text{теор}}}$, \text{мм/}{\text{\AA}} \\ \hline 
+0,27 & 0,05 & 0,277 & 0,003 \\ \hline
+0,17 & 0,03 & 0,190 & 0,004 \\ \hline
+0,13 & 0,03 & 0,153 & 0,004 \\ \hline
+0,13 & 0,03 & 0,131 & 0,003 \\ \hline
+0,12 & 0,02 & 0,118 & 0,003 \\ \hline
+\end{tabular}
+\caption{Линейная дисперсия}
+\end{table}
+Как видно, для всех точек теоретическое и экспериментальное значения равны в пределах доверительных интервалов.\\
+Также измерим толщину зелёного кольца:
+\begin{align*}
+\delta r = (0,71 \pm 0,02)\ \text{мм}
+\end{align*}
+Из этих данных получим аппаратную разрешающую способность:  
+\begin{align*}
+  &R = \dfrac{\lambda}{\delta \lambda} \approx \dfrac{4f^2}{d \delta r} = (3100 \pm 100) \quad \text{для зелёной линии}
+\end{align*}
+Оценим также прочие характеристики интерферометра:\\
+- максимальный порядок интерференции $m$ для желтых линий ртути:\\
+$$ m = \frac{2L \cos \theta}{\lambda} \approx \frac{2L}{\lambda} = (187,0 \pm 1,9)$$
+- добротность (при $r = 0.0913$):
+$$ Q = \frac{2 \pi L}{\lambda (1 - r)} = (4700 \pm 50)$$
+- число интерферирующих лучей: 
+$$ N = \frac{Q}{m} = (25,1 \pm 0,4)$$
+\section*{Выводы}
+В ходе работы удалось провести оценку некоторых характеристик интерферометра:
+\begin{itemize}
+    \item Была оценена база интерферометра $L = (0,1083 \pm 0,0011)$ мм, что достаточно близко к теоретическому значению $L_{\text{теор}} = 0,1$ мм.
+    \item Для жёлтого дублета была найдена разность длин волн $\Delta \lambda = (0,62 \pm 0,14)$ нм, что сходится с теоретическим значением $\Delta \lambda_{\text{теор}} = 2,11$ по порядку величины, однако не в рамках доверительного интервала, к тому же, точность данного метода достаточно мала - $\varepsilon = 23 \%$.
+    \item Были посчитаны значения линейной дисперсии интерферометра, значения сошлись с теоретическими в пределах доверительных интервалов.
+    \item Были оценены такие параметры как: аппаратная разрешающая способность - $R = (3100 \pm 100)$, максимальный порядок интерференции - $m = (187,0 \pm 1,9)$, добротность - $Q = (4700 \pm 50)$, число интерферирующих лучей - $N = (25,1 \pm 0,4)$.
+\end{itemize}
+
+\end{document}
