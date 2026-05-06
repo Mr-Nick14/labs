@@ -1,0 +1,339 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfplots}
+\usepackage[unicode, pdftex]{hyperref}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amsfonts,amsthm, mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{wrapfig}
+\usepackage{floatrow}
+\usepackage{setspace}
+\usepackage[headings]{fancyhdr}
+\usepackage[margin=10pt,font={small,stretch=0,9},labelfont=bf,labelsep=period,
+justification=centerlast]{caption}
+\usepackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{longtable}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{icomma}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+\usepackage{soulutf8} 
+\usepackage{etoolbox} 
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[normalem]{ulem}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg}
+\usepackage{indentfirst}
+\usepackage[T2A]{fontenc}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{multicol}
+\usepackage{lastpage}
+
+\pgfplotsset{
+  MyStyle1/.style={
+    axis lines = middle,
+    enlargelimits = true,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    minor tick num=5,
+    enlargelimits=0.05,
+    ticklabel style={font=\tiny,fill=white},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south east},
+  }
+}
+\def\Slope{1.5}
+\def\Intercept{-20}
+
+
+% Настройка отчёркиваний и нумерации
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\nouppercase{\leftmark\hfill}}
+\fancyfoot[RO, RE]{Страница \thepage \ из \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+	\textit{Федеральное государственное автономное образовательное\\ учреждение высшего образования }
+	
+	\vspace{0.5ex}
+	
+	\textbf{«Московский физико-технический институт\\ (национальный исследовательский университет)»}
+\end{center}
+
+\vspace{10ex}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width = 0.8\textwidth]{MIPT.png}
+  \end{center}
+\end{figure}
+
+\begin{center}
+	
+	\textbf{Лабораторная работа №3.7.3}
+	
+	\vspace{1ex}
+	
+	по курсу общей физики
+	
+	на тему:
+	
+	\textbf{\textit{<<Длинные линии>>}}
+	
+	\vspace{20ex}
+	
+	\begin{flushright}
+		\noindent
+		\textit{Работу выполнил:}\\  
+		\textit{Легких Никита \\(группа Б05-301)}
+	\end{flushright}
+	\vfill
+	Долгопрудный \\ \today
+	\setcounter{page}{1}
+\end{center}
+\newpage
+
+% Конец шаблона
+\newpage
+
+\textbf{Цель работы:} ознакомится и проверить на практике теорию распространения электрических сигналов вдоль длинной линии; измерить амплитудо- и фазово-частотные характеристики коаксиальной линии; определить погонные характеристики такой линии; на примере модели длинной линии изучить вопрос распределения амплитуды колебаний сигнала по длине линии.
+
+\textbf{В работе используются:} осциллограф АКТАКОМ ADS-6142H; генератора АКИП 3420/1; бухта с коаксиальным кабелем pk 50-4-11; схематический блок "модель длинной линии"; магазин сопротивления Р33, соединительные провода.
+
+
+\section*{Теоретическая справка}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{3.7.3 Длинные линии/pics/koak_cable.png}
+\label{fig:koak_cable}
+\end{figure}
+
+Рассмотрим элемент $dx$ такого кабеля. Такой элемент обладает индуктивностью
+\begin{equation}
+    dL=2\mu\ln\left(\frac{r_2}{r_1}\right)dx
+\end{equation}
+величина $L_x=dL/dx=2\mu\ln\left(r_2/r_1\right)$ называется погонной индуктивностью.
+	
+Так же два проводника обладают взаимной ёмкостью
+	\begin{equation}
+		dC=\frac{\varepsilon}{2\ln(r_2/r_1)}dx
+	\end{equation}
+	аналогично определяется погонная ёмкость $C_x=dC/dx=\frac{\varepsilon}{2\ln(r_2/r_1)}$. При передаче сигналов по такому кабелю возникают противоположно направленные токи по внешней оболочке и внутреннему проводнику, а также напряжение между проводниками. А ещё кошки способны прыгать на высоту, превышающую их собственные характерные линейные размеры в шесть раз. При высоких частотах величины $I$ и $U$ будут зависеть от $x$.
+	
+	Падение напряжения на концах выбранного элемента связано с возникновением ЭДС индукции и омическим сопротивлением. От сюда получим
+	\begin{equation}\label{Ueq}
+		U(x+dx)-U(x)=-\frac{L_xdx}{c^2}\frac{\partial I}{\partial t}-R_xIdx
+	\end{equation}
+ 	где $R_x= dR/dx= (\sigma S)^{-1}$ -- погонное сопротивление, $\sigma$ -- удельная проводимость, $S=\pi r_1^2$ -- площадь поперечного сечения проводника.
+ 	
+ 	Изменение силы тока связано с перетеканием части заряда на ёмкость, т.е
+ 	\begin{equation}\label{Ieq}
+ 		I(x+dx)-I(x)=-\frac{\partial q}{\partial t}=-C_x dx \frac{\partial U}{\partial t}
+ 	\end{equation}
+ 	
+ 	Разделив уравнения \eqref{Ueq} и \eqref{Ieq} на $dx$ получим систему.
+ 	\begin{equation}
+ 		\begin{cases}
+ 			\frac{\partial U}{\partial x}=-\frac{L_x}{c^2}\frac{\partial I}{\partial t}-R_xI
+ 			\\
+ 			\frac{\partial I}{\partial x}=-C_x\frac{\partial U}{\partial t}
+ 		\end{cases}
+ 	\end{equation}
+ 	Продифференцировав первое уравнение по $x$, а второе по $t$ получим
+ 	\begin{equation}\label{WaveSystUeq}
+ 		\begin{cases}
+ 			\frac{\partial^2 U}{\partial x^2}=-\frac{L_x}{c^2}\frac{\partial I}{\partial x\partial t}-R_x\frac{\partial I}{\partial x}
+ 			\\
+ 			\frac{\partial I}{\partial t\partial x}=-C_x\frac{\partial^2 U}{\partial t^2}
+ 		\end{cases}
+ 	\end{equation}
+ 	Итого получим уравнение
+ 	\begin{equation}\label{WaveUeq}
+ 		\frac{\partial^2 U}{\partial t^2}-V^2_\text{ф}\frac{\partial^2 U}{\partial x^2}+\gamma\frac{\partial U}{\partial t}=0
+ 	\end{equation}
+ 	где $V_\text{ф}=\frac{c}{\sqrt{L_xC_x}}$ -- фазовая скорость, $\gamma=R_xC_xV^2_\text{ф}$ -- декремент затухания. Подставив погонные характеристики в выражение для фазовой скорости, заметим, что фазовая скорость совпадает со скоростью распространения электромагнитных волн в среде.
+ 	\begin{equation}
+ 		V_\text{ф}=\frac{c}{\sqrt{\varepsilon\mu}}
+ 	\end{equation}
+ 	
+ 	Решение уравнения \eqref{WaveUeq} ищется в виде
+ 	\begin{equation}\label{WaveUsol}
+ 		U(x,t)=U_0e^{-i\omega t}e^{(-\alpha+ik)x}
+ 	\end{equation}
+ 	Из первого уравнения системы \eqref{WaveSystUeq} получается сила тока
+ 	\begin{equation}
+ 		I(x,t)=U_0\frac{C_x\omega}{k+i\alpha}e^{-i\omega t}e^{(-\alpha+ik)x}
+ 	\end{equation}
+ 	Зная это, получим значение импеданса
+ 	\begin{equation}
+ 		Z(\omega,k)=\frac{U(x,t)}{I(x,t)}=\frac{k+i\alpha}{C_x\omega}
+ 	\end{equation}
+ 	В пределе малых затуханий $\alpha\ll\omega$
+ 	\begin{equation}
+ 		Z\approx\frac{k}{C_x\omega}=\frac{1}{C_xV_\text{ф}}=\frac{1}{c}\sqrt{\frac{L_x}{C_x}}
+ 	\end{equation}
+ 	Если в конце замкнуть длинную линию на сопротивление $R_0=Z$, то отражённой волны не возникнет, т.к с точки зрения волны это будет эквивалентным продолжением линии. Иначе возникает отражённая волна, описываемая выражением
+ 	\begin{equation}
+ 		U(x,t)=U_0e^{-i\omega t}e^{-(\alpha+ik)x}
+ 	\end{equation}
+ 
+ 	Подстановка \eqref{WaveUsol} в \eqref{WaveUeq} даёт характеристическое уравнение
+ 	\begin{equation}
+ 		\omega^2 + V_\text{ф}^2(ki-\alpha)^2 + i\omega\gamma=0
+ 	\end{equation}
+ 	От сюда получим систему
+ 	\begin{equation}
+ 		\begin{cases}
+ 			\omega^2=V_\text{ф}^2(k^2-\alpha^2)
+ 			\\
+ 			2\alpha kV_\text{ф}^2=\omega\gamma
+ 		\end{cases}
+        \label{eq:y_x}
+ 	\end{equation}
+ 	Решая которую в пределе малых затуханий, получим
+ 	\begin{equation}\label{alphaSol}
+ 		\alpha=\frac{\omega}{V_\text{ф}}\sqrt{\frac{\sqrt{1+(\gamma/\omega)^2}-1}{2}}\approx\frac{\omega}{V_\text{ф}}\sqrt{\frac{\gamma^2}{4\omega^2}}=\frac{\gamma}{2V_\text{ф}}=R_xC_x\frac{V_\text{ф}}{2}
+ 	\end{equation}
+ 	\begin{equation}\label{kSol}
+ 		k=\frac{\omega}{V_\text{ф}}
+ 	\end{equation}
+ 	
+ 	Таким образом амплитуда напряжения на нагрузке будет иметь вид:
+ 	\begin{equation}\label{Un}
+ 		U_\text{н}(t)=U_0e^{-\alpha l}e^{ikl}e^{-\omega t}
+ 	\end{equation}
+ 	При этом амплитуда колебаний на согласованной нагрузке (в конце длинной линии) имеет вид:
+ 	\begin{equation}\label{UnAmp}
+ 		U_\text{н}=U_0e^{-\alpha l}
+ 	\end{equation}
+ 	Так же получена разность фаз
+ 	\begin{equation}\label{dphi}
+ 		\Delta \varphi=kl
+ 	\end{equation}
+ 	
+ 	Из уравнений \eqref{UnAmp} и \eqref{dphi} получим соотношения для экспериментального определения $\alpha$ и $k$ для различных $\omega$
+ 	\begin{equation}\label{alphaomega}
+ 		\alpha(\omega)=\frac{1}{l}\ln\frac{U_0}{U_\text{н}}
+ 	\end{equation}
+ 	\begin{equation}\label{komega}
+ 		k(\omega)=\frac{\Delta \varphi}{l}
+ 	\end{equation}
+
+\section*{Установка}
+Коаксиальный кабель подключается к генератору и осциллографу. На канал 1 выводится сигнал, подаваемый генератором, а с канала 2 снимается напряжение на нагрузке. Схема экспериментальной установки изображена ниже.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.35\linewidth]{3.7.3 Длинные линии/pics/scheme_1.png}
+\label{fig:koak_cable}
+\end{figure}
+
+Похожая установка используется для измерений с моделью длинной линии.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\linewidth]{3.7.3 Длинные линии/pics/scheme_2.png}
+\label{fig:koak_cable}
+\end{figure}
+
+\section*{Задание}
+\subsection*{Оценка фазовой и групповой скорости}
+{\large \textit{\textbf{Синусоидальный сигнал} (согласованная линия)}}
+
+Ставим $R = 50$ Ом. Определяем резонансные частоты, по визуальному увеличению амплитуды и разнице кратной $2\pi$:$\;\;\;\;\;$ 
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$\nu$, МГц & 3.9 & 7.85 & 11.8 & 15.76 & 19.7 & 23.65 & 27.68 \\ \hline
+\end{tabular}
+
+{\large \textit{\textbf{Синусоидальный сигнал} (линия без нагрузки)}}
+
+Ставим $R = 1$ МОм. Определяем резонансные частоты, по визуальному увеличению амплитуды и разнице кратной $2\pi$:$\;\;\;\;\;\;\;$ 
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$\nu$, МГц & 3.65 & 7.75 & 11.8 & 15.8 & 19.77 & 23.75 & 27.65 \\ \hline
+\end{tabular}
+
+{\large \textit{\textbf{Прямоугольные импульсы} (согласованная линия)}}
+
+Ставим $R = 50$ Ом. Определяем резонансные частоты, по визуальному увеличению амплитуды и разнице кратной $2\pi$:$\;\;\;\;\;$ 
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$\nu$, МГц & 3.94 & 7.89 & 11.83 & 15.77 & 19.75 \\ \hline
+\end{tabular}
+
+{\large \textit{\textbf{Прямоугольные импульсы} (линия без нагрузки)}}
+
+Ставим $R = 1$ МОм. Определяем резонансные частоты, по визуальному увеличению амплитуды и разнице кратной $2\pi$:$\;\;\;\;\;\;$ 
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$\nu$, МГц & 3.95 & 7.91 & 11.87 & 15.82 & 19.77 \\ \hline
+\end{tabular}
+
+\subsection*{Амплитудно-частотная и фазово-частотная характеристики}
+Ставим $R = 50$ Ом на осциллографе, меняя частоту входного сигнала находим максимальное напряжение $U_0 = 8$ В.\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$\nu$, МГц  & 1   & 4    & 7   & 9    & 13  & 16   & 19   \\ \hline
+$2A_\text{г}$, В & 5.2 & 5.04 & 4.8 & 4.64 & 4.4 & 4.26 & 4.17 \\ \hline
+$2A_\text{ж}$, В & 5.6 & 5.6  & 5.6 & 5.6  & 5.6 & 5.6  & 5.6  \\ \hline
+$\Delta x$, нс   & 254 & 8$(+2\pi)$   & 111 & 33$(+2\pi)$  & 24$(+2\pi)$ & 4.8$(+2\pi)$ & 44   \\ \hline
+\end{tabular} \\
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$\nu$, МГц  & 22     & 25    & 28   & 31   & 34    & 37    & 40   \\ \hline
+$2A_\text{г}$, В & 3.95  & 3.94  & 3.93 & 3.8  & 3.8   & 3.75  & 3.6  \\ \hline
+$2A_\text{ж}$, В & 5.6   & 5.6   & 5.6  & 5.6  & 5.6   & 5.6   & 5.6  \\ \hline
+$\Delta x$, нс  & 26.4$(+2\pi)$ & 13.6$(+2\pi)$ & 3.6$(+2\pi)$ & 27.8 & 18.4$(+2\pi)$ & 17.2$(+2\pi)$ & 3.2$(+2\pi)$ \\ \hline
+\end{tabular}
+
+
+
+\subsection*{Обработка результатов измерений.}
+\textbf{Часть I. Определение параметров коаксиального кабеля.}
+Из системы (\ref{eq:y_x}) и уравнений (21), (22) можно выделить следующую замену: 
+\begin{equation*}
+    y_1 = \frac{L_x C_x}{c^2} x_1
+    \label{eq:y1_x1}
+\end{equation*}
+где 
+$$x_1 = \omega^2$$
+$$y_1 = k(\omega)^2 - \alpha(\omega)^2.$$
+Также пользуясь уравнением (12) $\Right\;R = \frac{1}{c} \sqrt{\frac{L_x}{C_x}}$ можно посчитать $L_x$ и $C_x$. 
+
+
+
+\end{document}

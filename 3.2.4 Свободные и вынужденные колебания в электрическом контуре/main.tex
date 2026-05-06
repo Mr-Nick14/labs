@@ -1,0 +1,536 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfplots}
+\usepackage[unicode, pdftex]{hyperref}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amsfonts,amsthm, mathtools}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{wrapfig}
+\usepackage{floatrow}
+\usepackage{setspace}
+\usepackage[headings]{fancyhdr}
+\usepackage[margin=10pt,font={small,stretch=0,9},labelfont=bf,labelsep=period,
+justification=centerlast]{caption}
+\usepackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{longtable}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{icomma}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+\usepackage{soulutf8} 
+\usepackage{etoolbox} 
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[normalem]{ulem}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg}
+\usepackage{indentfirst}
+\usepackage[T2A]{fontenc}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{multicol}
+\usepackage{lastpage}
+
+\pgfplotsset{
+  MyStyle1/.style={
+    axis lines = middle,
+    enlargelimits = true,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    minor tick num=5,
+    enlargelimits=0.05,
+    ticklabel style={font=\tiny,fill=white},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south east},
+  }
+}
+\def\Slope{1.5}
+\def\Intercept{-20}
+
+
+% Настройка отчёркиваний и нумерации
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\nouppercase{\leftmark\hfill}}
+\fancyfoot[RO, RE]{Страница \thepage \ из \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+	\textit{Федеральное государственное автономное образовательное\\ учреждение высшего образования }
+	
+	\vspace{0.5ex}
+	
+	\textbf{«Московский физико-технический институт\\ (национальный исследовательский университет)»}
+\end{center}
+
+\vspace{10ex}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width = 0.8\textwidth]{MIPT.png}
+  \end{center}
+\end{figure}
+
+\begin{center}
+	
+	\textbf{Лабораторная работа № 3.2.4}
+	
+	\vspace{1ex}
+	
+	по курсу общей физики
+	
+	на тему:
+	
+	\textbf{\textit{<<Свободные и вынужденные
+ колебания в электрическом контуре>>}}
+	
+	\vspace{20ex}
+	
+	\begin{flushright}
+		\noindent
+		\textit{Работу выполнил:}\\  
+		\textit{Легких Никита \\(группа Б05-301)}
+	\end{flushright}
+	\vfill
+	Долгопрудный \\ \today
+	\setcounter{page}{1}
+\end{center}
+\newpage
+
+% Конец шаблона
+\newpage
+
+\textbf{Цель работы:} исследование свободных и вынужденных колебаний в
+колебательном контуре. \\ \\
+\textbf{В работе используются:} осциллограф АКТАКОМ ADS-6142H, генератор сигналов специальной формы АКИП-3409/4, магазин сопротивления МСР-60, магазин емкости Р5025, магазин индуктивности Р567 типа
+МИСП, соединительная коробка с шунтирующей емкостью, соединительные одножильные и коаксиальные провода.
+
+
+\section*{Теоретическая справка}
+
+
+\begin{wrapfigure}{l}{0.35\linewidth} 
+	\includegraphics[width=6cm]{3.2.4 Свободные и вынужденные колебания в электрическом контуре/картинки/RLC.png}
+	\caption{Колебательный контур}
+	\label{RLC}
+\end{wrapfigure}
+
+Основное уравнение колебательного контура 
+
+\begin{equation}\label{ddot I}
+\ddot{I} + 2\gamma\dot{I} + \omega_0^2I = 0
+\end{equation}
+
+Где $ \gamma = \dfrac{R}{2L} $ --- коэффициент затухания, $ \omega_0^2 = \dfrac{1}{LC} $ --- собственная частота контура. Решением этого уравнения являются затухающие колебания:
+
+\begin{equation}\label{}
+I = A e^{-\gamma t} \cos (\omega t - \theta)
+\end{equation}
+
+Здесь $ \omega = \sqrt{\omega_0^2 - \gamma^2} $. Можно записать решение \eqref{ddot I} и для напряжения:
+
+\begin{equation}\label{}
+U_C = U_0 \dfrac{\omega_0}{\omega} e^{-\gamma t}\cos (\omega t - \theta)
+\end{equation}
+
+В контуре со слабым затуханием $ (\omega \backsimeq \omega_0) $ верна \textbf{формула Томпсона} для периода: 
+
+\begin{equation}\label{}
+T = \dfrac{2\pi}{\omega_0} \backsimeq  \dfrac{2\pi}{\omega} = 2\pi\sqrt{LC}
+\end{equation}
+
+Режим работы контура, при котором $ \gamma = \omega_0 $, называется \textbf{критическим}. Его сопротивление равно 
+
+\begin{equation}\label{}
+R_{кр} = 2\sqrt{\dfrac{L}{C}}
+\end{equation}
+
+Потери затухающих колебаний принято характеризовать через \textbf{добротность} и \textbf{логарифмический декремент затухания}: 
+
+\begin{equation}\label{Q}
+Q = 2\pi \dfrac{W}{\Delta W} = \dfrac{1}{R} \sqrt{\dfrac{L}{C}} \quad - \quad \text{Добротность, потери энергии}
+\end{equation}
+\begin{equation}\label{theta}
+\Theta = \dfrac{1}{n} \gamma T = \dfrac{1}{n} \ln \dfrac{U_k}{U_{k+n}}  \quad - \quad \text{Лог. декремент, потери амплитуды}
+\end{equation}
+
+\section*{Установка}
+Схема установки для исследования колебаний приведена на рисунке 1.
+Колебательный контур состоит из постоянной индуктивности $L$ с активным сопротивлением $R_L$, переменной емкости $C$ и сопротивления $R$. Картина колебаний напряжения на емкости наблюдается на экране двухканального осциллографа. Для возбуждения затухающих колебаний используется генератор сигналов специальной формы. Сигнал с генератора поступает через конденсатор $C_1$ на вход колебательного контура. Данная емкость необходима чтобы выходной импеданс генератора был
+много меньше импеданса колебательного контура и не влиял на процессы, проходящие в контуре.
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\linewidth]{3.2.4 Свободные и вынужденные колебания в электрическом контуре/картинки/схема.png}
+\label{fig:ust}
+\end{figure}
+Установка предназначена для исследования не только возбужденных, но и свободных колебаний в электрической цепи. При изучении свободно затухающих колебаний генератор специальных сигналов на вход колебательного контура подает периодические короткие импульсы, которые заряжают конденсатор $C$. За время между последовательными импульсами происходит разрядка конденсатора через резистор и катушку индуктивности. Напряжение на конденсаторе $U_C$ поступает на вход канала 1(X) электронного осциллографа. Для наблюдения фазовой картины затухающих колебаний на канал 2(Y) подается напряжение с резистора R (пунктирная линия на схеме установки), которое пропорционально току $I$ ($I \sim dU_C/dt$).
+
+При изучении возбужденных колебаний на вход колебательного контура подается
+синусоидальный сигнал. С помощью осциллографа возможно измерить зависимость
+амплитуды возбужденных колебаний в зависимости от частоты внешнего сигнала,
+из которого возможно определить добротность колебательного контура. Альтернативным способом расчета добротности контура является определение декремента
+затухания по картине установления возбужденных колебаний. В этом случае генератор сигналов используется для подачи цугов синусоидальной формы.
+
+
+\section*{Задание}
+\section*{2.2 Измерение периодов свободных колебаний}
+Устанавливаем $R = 0$ Ом, $L = 100$ Гн, $C = 0$ мкФ.
+
+Измеряем период при помощи осциллографа (причем измеряем расстояние именно между пересечениями оси $Ot$) $T = 65.2$ мкс, отсюда по формуле (\ref{eq:parazit_C}) получаем величину паразитной емкости 
+\begin{equation}
+    T = 2\pi \sqrt{LC} \Rightarrow C_{\text{пар}} = C_0 = \frac{T^2}{4\pi^2 L} \approx 1.1\;\;\text{нФ}
+    \label{eq:parazit_C}
+\end{equation}
+
+Также снимем зависимость периода затухающих колебаний от емкости контура: \\
+\begin{tabular}{|c|c|c|}
+\hline
+$C$, нФ & $T_{\text{эксп}}$, мкс & $T_{\text{теор}}$, мкс   \\ \hline
+1.1  & 65.2  & 65.9  \\ \hline
+2.1  & 90.5  & 91.1  \\ \hline
+3.1  & 112.0   & 110.6 \\ \hline
+4.1  & 127.3 & 127.2 \\ \hline
+5.1  & 142.4 & 141.9 \\ \hline
+6.1  & 155.2 & 155.2 \\ \hline
+7.1  & 168.0   & 167.4 \\ \hline
+8.1  & 178.4 & 178.8 \\ \hline
+9.1  & 188.8 & 189.5 \\ \hline
+10.1 & 198.4 & 199.7 \\ \hline
+\end{tabular}\label{tb:T(C)_zatuh_koleb}
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.6\linewidth,
+          height=,
+          xlabel={$T_{\text{теор}}$, мкс},
+          ylabel={$T_{\text{эксп}}$, мкс},
+          MyStyle1,
+          ]
+          \draw[pink, domain=0:250] plot (\x, 1*\x);
+          \addplot [only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=T2, y=T1,
+                x error minus=dT2, x error plus=dT2, y error minus=dT1, y error plus=dT1, col sep=comma] {csv/1.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}
+\\
+Расчет стобцов ведем по следуюзим формулам: $T_{\text{теор}} = 2\pi \sqrt{LC}$, $\Delta T = T \frac{\Delta C}{2C}$\\
+Погрешности считаем учитывая что $\Delta C = 0.05$ нФ, $\Delta T_{\text{эксп}} = 1$ мкс; все погрешности < 1\% $ \Rightarrow$ в данном случае они пренебрежимо малы.
+
+\section*{2.3 Критическое сопротивление и декремент затухания}
+Устанавливаем $L = 100$ Гн. Хотим также $\nu_0 = 6.5$ кГц для этого рассчитаем $C^*$ по формуле (\ref{eq:C^*_2.3}) и выставим его на установке. Опорное значение сопротивления - критическое сопротивление контура $R_{cr}$, критическое оно в том смысле что режим колебаний переходит от периодического к апериодическому, рассчитываем по формуле (\ref{eq:R_cr_2.3}). 
+\begin{equation}
+    \nu_0 = \frac{1}{2\pi \sqrt{LC}} \Rightarrow C^* = \frac{1}{\nu_0^2 4 \pi^2 L} = 6\;\;\text{нФ}
+    \label{eq:C^*_2.3}
+\end{equation}
+\begin{equation}
+    R_{cr} =  \sqrt{\frac{L}{C^*}} = 8160\;\;\text{Ом}
+    \label{eq:R_cr_2.3}
+\end{equation}
+Далее снимаем кривые напряжения $U$ при различных сопротивлениях $R$ и посчитаем добротность нашего контура:\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+$R$, Ом    & $U_i$, В     & $U_{i+n}$, В    & $n$ & $\Theta$ & $R_\Sigma$, Ом & $\frac{1}{\Theta^2}$ &  $\frac{1}{R_\Sigma^2} \cdot 10^{-6}$, Ом$^{-2}$ & $Q$ \\ \hline
+410  & 9.80  & 4.68 & 2 & 0.37 & 487  & 7.32                   & 4.22                   & 8.50 \\ \hline
+610  & 12.50 & 4.56 & 2 & 0.50 & 687  & 3.93                   & 2.12                   & 6.23 \\ \hline
+810  & 11.32 & 3.10 & 2 & 0.65 & 887  & 2.38                   & 1.27                   & 4.85 \\ \hline
+1010 & 9.90  & 4.60 & 1 & 0.77 & 1087 & 1.70                   & 0.85                   & 4.10 \\ \hline
+1210 & 9.04  & 3.52 & 1 & 0.94 & 1287 & 1.12                   & 0.60                   & 3.33 \\ \hline
+1410 & 8.08  & 2.72 & 1 & 1.09 & 1487 & 0.84                   & 0.45                   & 2.89 \\ \hline
+1610 & 7.32  & 1.96 & 1 & 1.32 & 1687 & 0.58                   & 0.35                   & 2.38 \\ \hline
+1810 & 6.52  & 1.56 & 1 & 1.43 & 1887 & 0.49                   & 0.28                   & 2.20 \\ \hline
+2010 & 5.88  & 1.20 & 1 & 1.59 & 2087 & 0.40                   & 0.23                   & 1.98 \\ \hline
+\end{tabular}\\
+Пересчет для величин из таблицы делаем по следуюзим формулам: 
+\begin{equation}
+    \Theta = \frac{1}{n} \ln\left(\frac{U_i}{U_{i+n}}\right)
+    \label{eq:Theta}
+\end{equation}
+\begin{equation}
+    R_\Sigma = R + R_L
+    \label{eq:Rsigma}
+\end{equation}
+\begin{equation}
+    Q = \frac{\pi}{\Theta}
+    \label{eq:Q_exper}
+\end{equation}
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.7\linewidth,
+          height=,
+          xlabel={$\frac{1}{R_\Sigma^2}\cdot 10^{-6}$, Ом$^{-2}$},
+          ylabel={$\frac{1}{\Theta^2}$},
+          MyStyle1,
+          ]
+          \draw[pink, domain=0:10] plot (\x,1.8*\x);
+          \addplot [only marks] table [
+                      x=1/Rsigma2, y=1/Theta2,
+                      col sep=comma] {csv/2.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}
+Из графика получаем что $k = (1.77\pm0.08) \cdot 10^6$, Ом$^2$, отсюда $R_{cr} = 2\pi \sqrt{k} = (8360\pm190)$, Ом. Полученное значение отличается от теоретического лишь на $2\frac{8360-8160}{8360+8160}\cdot 100\% \approx 2\%$.
+
+Для следующих пунктов фиксируем два различных значения сопротивления: $R_1 = 410$ Ом, $R_2 = 2010$ Ом.
+
+\section*{2.4 Свободные колебания на фазовой плоскости}
+Фиксируем $\nu_0 = 450$ кГц и снимаем требуюмую зависимость варьируя $R$ от $R_1$ до $R_2$: \\
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$R$, Ом    & $U_i$, В     & $U_{i+n}$, В    & $n$ & $\Theta$ & $Q_{\text{эксп}}$ & $Q_{\text{теор}}$    \\ \hline
+410  & 2.8 & 1.4 & 2 & 0.35 & 9.06 & 9.96                   \\ \hline
+610  & 2.5 & 0.9 & 2 & 0.51 & 6.15 & 6.69                   \\ \hline
+810  & 2.2 & 1.1 & 1 & 0.69 & 4.53 & 5.04                   \\ \hline
+1010 & 2.2 & 1.0 & 1 & 0.79 & 3.98 & 4.04                   \\ \hline
+1210 & 4.5 & 0.6 & 2 & 1.01 & 3.12 & 3.37                   \\ \hline
+1410 & 4.0 & 1.3 & 1 & 1.12 & 2.80 & 2.90                   \\ \hline
+1610 & 3.6 & 1.0 & 1 & 1.28 & 2.45 & 2.54                   \\ \hline
+1810 & 3.2 & 0.8 & 1 & 1.39 & 2.27 & 2.26                   \\ \hline
+2010 & 2.9 & 0.6 & 1 & 1.58 & 1.99 & 2.03                   \\ \hline
+\end{tabular}\\
+Расчеты велись по формулам $\Theta$ - (\ref{eq:Theta}), $Q_{\text{эксп}}$(\ref{eq:Q_exper}),
+\begin{equation}
+    Q_{\text{теор}} = \frac{1}{R} \sqrt{\frac{C}{L}},
+    \label{eq:Q_teor}
+\end{equation}
+где $L = 100\;\;\text{Гн}, C = 6\;\;\text{нФ}$.
+
+\section*{2.5 Исследование резонансных кривых}
+1) Фиксируем  $C = C^*$, $R = R_1$ и собираем новую схему согласно описанию. Далее ищем $\Delta \nu$ влево и вправо: 
+\begin{multline*}
+    U_{1\;Res} = 100\;\;\text{В} \\
+    \Delta \nu_{\text{л}} = 6.45 - 5.71 = 0.74\;\;\text{кГц} \\
+    \Delta \nu_{\text{п}} = 7.55 - 6.45 = 1.10\;\;\text{кГц}\\
+    \delta \nu_{\text{л}} = 0.07\;\;\text{кГц}\\
+    \delta \nu_{\text{п}} = 0.10\;\;\text{кГц}\\
+\end{multline*}
+Влево: \hspace{46.5 mm} Вправо:\\
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\nu$, Гц   & $U$, В    & $\Delta x$, мкс & $\varphi$    \\ \hline
+6380 & 98.0 & 40.0 & 1.603 \\ \hline
+6310 & 94.0 & 44.8 & 1.776 \\ \hline
+6240 & 87.0 & 48.4 & 1.898 \\ \hline
+6170 & 79.2 & 53.2 & 2.062 \\ \hline
+6100 & 71.2 & 57.0 & 2.185 \\ \hline
+6030 & 63.6 & 60.0 & 2.273 \\ \hline
+5960 & 57.6 & 63.4 & 2.374 \\ \hline
+5890 & 51.6 & 65.6 & 2.428 \\ \hline
+5820 & 45.4 & 67.8 & 2.479 \\ \hline
+5750 & 41.6 & 69.8 & 2.522 \\ \hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\nu$, Гц   & $U$, В    & $\Delta x$, мкс & $\varphi$    \\ \hline
+6550 & 98.8 & 28.0 & 1.152 \\ \hline
+6650 & 91.6 & 22.2 & 0.928 \\ \hline
+6750 & 82.8 & 18.1 & 0.768 \\ \hline
+6850 & 74.4 & 14.6 & 0.628 \\ \hline
+6950 & 66.4 & 12.2 & 0.533 \\ \hline
+7050 & 60.4 & 10.3 & 0.456 \\ \hline
+7150 & 55.2 & 8.9  & 0.400 \\ \hline
+7250 & 50.8 & 7.6  & 0.346 \\ \hline
+7350 & 46.8 & 6.7  & 0.309 \\ \hline
+7450 & 43.2 & 5.8  & 0.271 \\ \hline
+7550 & 41.2 & 5.4  & 0.256 \\ \hline
+\end{tabular}\\
+2) Теперь меняем сопротивление магазина на $R_2$
+\begin{multline*}
+    U_{2\;Res} = 26.4\;\;\text{В} \\
+    \nu_0 = 6.9\;\;\text{кГц} \\
+    \Delta \nu_{\text{л}} = 6.9 - 4.4 = 2.5\;\;\text{кГц} \\
+    \Delta \nu_{\text{п}} = 12.2 - 6.9 = 5.3\;\;\text{кГц}\\
+    \delta \nu_{\text{л}} = 250\;\;\text{Гц}\\
+    \delta \nu_{\text{п}} \neq const\\
+\end{multline*}
+Влево: \hspace{46.5 mm} Вправо:\\
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\nu$, Гц   & $U$, В    & $\Delta x$, мкс & $\varphi$    \\ \hline
+6900 & 26.6 & 19.3 & 0.837 \\ \hline
+6650 & 26.6 & 22.7 & 0.948 \\ \hline
+6400 & 26.0 & 27.0 & 1.086 \\ \hline
+6150 & 24.8 & 32.2 & 1.244 \\ \hline
+5900 & 22.6 & 36.9 & 1.368 \\ \hline
+5650 & 20.4 & 42.1 & 1.495 \\ \hline
+5400 & 18.4 & 47.5 & 1.612 \\ \hline
+5150 & 16.4 & 52.4 & 1.696 \\ \hline
+4900 & 14.4 & 57.8 & 1.780 \\ \hline
+4650 & 12.3 & 62.8 & 1.835 \\ \hline
+4400 & 10.6 & 68.3 & 1.888 \\ \hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\nu$, Гц   & $U$, В    & $\Delta x$, мкс & $\varphi$ \\ \hline
+7200  & 26.2 & 15.5 & 0.701 \\ \hline
+7500  & 25.8 & 12.5 & 0.589 \\ \hline
+7800  & 24.8 & 10.0 & 0.490 \\ \hline
+8100  & 23.0 & 8.3  & 0.422 \\ \hline
+8400  & 22.4 & 6.7  & 0.354 \\ \hline
+8700  & 21.6 & 5.5  & 0.301 \\ \hline
+9000  & 20.8 & 4.6  & 0.260 \\ \hline
+9300  & 20.0 & 3.8  & 0.222 \\ \hline
+9600  & 19.2 & 3.1  & 0.187 \\ \hline
+10600 & 17.2 & 1.6  & 0.109 \\ \hline
+11600 & 16.3 & 0.9  & 0.064 \\ \hline
+12600 & 15.5 & 0.4  & 0.035 \\ \hline
+\end{tabular}\\
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.8\linewidth,
+          height=,
+          xlabel={$\frac{\nu}{\nu_0}$},
+          ylabel={$\frac{U}{U_0}$},
+          MyStyle1,
+          ]
+          \draw[blue, domain=0:10] plot (\x,0.707106);
+          \addplot [only marks] table [
+                      x=1nu/nu0, y=1U/U0,
+                col sep=comma] {csv/7.csv};
+          \addplot [purple, only marks] table [
+                      x=2nu/nu0, y=2U/U0,
+                col sep=comma] {csv/7.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}
+Из данного графика резонансной кривой получаем
+\begin{equation*}
+    \begin{cases}
+        Q_{R_1} = \frac{\omega_0}{2\Delta\Omega} = \frac{\nu_0}{2 \Delta \nu} = 9.1 \\
+        \Delta Q_{R_1} = Q_{R_1} \cdot \frac{\delta(\Delta \nu)}{\Delta \nu} = 0.2
+    \end{cases} \Rightarrow
+    Q_{R_1} = (9.12\pm0.07)
+\end{equation*}
+\begin{equation*}
+    \begin{cases}
+        Q_{R_2} = \frac{\omega_0}{2\Delta\Omega} = \frac{\nu_0}{2 \Delta \nu} = 1.5 \\
+        \Delta Q_{R_2} = Q_{R_2} \cdot \frac{\delta(\Delta \nu)}{\Delta \nu} = 0.02
+    \end{cases} \Rightarrow
+    Q_{R_2} = (1.50\pm0.02)
+\end{equation*}
+Теперь строим ФЧХ по полученным данным:\\
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.8\linewidth,
+          height=,
+          xlabel={$\nu$, кГц},
+          ylabel={$\varphi$},
+          MyStyle1,
+          ]
+          \draw[blue, domain=0:100] plot (\x,1.5707963);
+          \draw[green, domain=0:100] plot (\x,2.35619);
+          \addplot [only marks] table [
+                      x=1nu, y=1phi,
+                 col sep=comma] {csv/9.csv};
+          \addplot [only marks] table [
+                      x=1nu, y=sim1phi,
+                 col sep=comma] {csv/9.csv};
+          \addplot[purple, only marks] table [
+                      x=2nu, y=2phi,
+                 col sep=comma] {csv/9.csv};
+          \addplot[purple, only marks] table [
+                      x=2nu, y=sim2phi,
+                 col sep=comma] {csv/9.csv};    
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}
+Из графика видно чток сожалению для $R_2$ у нас не выйдет определить добротность, а для $R_1$:
+\begin{equation*}
+    \begin{cases}
+        Q_{R_1} = \frac{\omega_0}{\Delta \omega} = \frac{6.45} {0.75} = 8.6 \\
+        \Delta Q_{R_1} = Q_{R_1} \cdot \frac{\delta(\Delta \nu)}{\Delta \nu} = 0.2
+    \end{cases} \Rightarrow
+    Q_{R_1} = (8.6\pm0.2)
+\end{equation*}
+
+\section*{2.6 Процессы установления и затухания}
+Выставляем $R = R_1$, генератор в режим Burst $\nu_0 = 6.5$ кГц, $N = 15$. 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{3.2.4 Свободные и вынужденные колебания в электрическом контуре/картинки/цуги.png}
+\caption{Примерный рисунок на осциллографе}
+\label{fig:czugi}
+\end{figure}
+По картине на осциллографе получаем следующие данные:
+\begin{multline*}
+    U_0 = 99.6\;\;\text{В}\\
+    \textbf{1}:\;\; U_k = 33.6\;\;\text{В},\;U_{k+4} = 84.4\;\;\text{В} \Rightarrow \Theta = 0.36 \\
+    \textbf{2}:\;\; U_k = 54.4\;\;\text{В},\;U_{k+6} = 94.8\;\;\text{В} \Rightarrow \Theta = 0.34 \\
+    \textbf{3}:\;\; U_m = 70.4\;\;\text{В},\;U_{m+2} = 34.4\;\;\text{В} \Rightarrow \Theta = 0.35 \\
+\end{multline*}
+Для сопротивления $R = R_2$, получаем:
+\begin{multline*}
+    U_0 = 26.8\;\;\text{В}\\
+    \textbf{1}:\;\; U_k = 9.0\;\;\text{В},\;U_{k+2} = 26.4\;\;\text{В} \Rightarrow \Theta = 1.90\\
+    \textbf{2}:\;\; U_m = 26.6\;\;\text{В},\;U_{m+1} = 21.0\;\;\text{В} \Rightarrow \Theta = 3.36\\
+\end{multline*}
+Где $\Theta = \frac{1}{n} \ln \left( \frac{U_0-U_k}{U_0-U_{k+n}}\right)$.
+
+Определим добротность при $R_1$ и $R_2$, нарастании и затухания как: $Q_i = \frac{\pi}{<\Theta_i>}$, а $\Delta Q_1 = Q_1 \cdot \frac{\sigma(\Theta)}{<\Theta>} \rightarrow$
+\begin{equation*}
+    Q_1^{\text{нарастание}} = (9.0\pm0.3)
+\end{equation*}
+\begin{equation*}
+    Q_1^{\text{затухание}} = (7.9\pm0.8)
+\end{equation*}
+\begin{equation*}
+    Q_2^{\text{нарастание}} = (1.65\pm0.6)
+\end{equation*}
+\begin{equation*}
+    Q_2^{\text{затухание}} = (13.6\pm4)
+\end{equation*}
+
+\section*{2.7 Обработка результатов}
+Почти вся в прошлых пунктах. \\
+\begin{tabular}{|c|ccc|cccc|}
+\hline
+\multirow{2}{*}{$R$} & \multicolumn{3}{c|}{Свободные колебания}                  & \multicolumn{4}{c|}{Вынужденные колебания}                                                        \\ \cline{2-8} 
+                   & \multicolumn{1}{c|}{$f(L,C,R)$} & \multicolumn{1}{c|}{$f(\Theta)$} & Спираль & \multicolumn{1}{c|}{АЧХ} & \multicolumn{1}{c|}{ФЧХ} & \multicolumn{1}{c|}{Нарастание} & Затухание \\ \hline
+$R_1$ = & \multicolumn{1}{c|}{10.0}  & \multicolumn{1}{c|}{8.5}  &    9.1     & \multicolumn{1}{c|}{$(9.12\pm0.07)$}    & \multicolumn{1}{c|}{(8.6\pm0.2)}    & \multicolumn{1}{c|}{$(9.0\pm0.3)$}           &     $(7.9\pm0.8)$      \\ \hline
+$R_2$ = & \multicolumn{1}{c|}{2.0}  & \multicolumn{1}{c|}{2.0}  &     2.0    & \multicolumn{1}{c|}{$(1.50\pm0.02)$}    & \multicolumn{1}{c|}{-}    & \multicolumn{1}{c|}{$(1.65\pm0.6)$}           &      -     \\ \hline
+\end{tabular}
+
+
+
+
+
+\end{document}
