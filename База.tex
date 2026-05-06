@@ -1,0 +1,177 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfplots}
+\usepackage[unicode, pdftex]{hyperref}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amsfonts,amsthm, mathtools}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{wrapfig}
+\usepackage{floatrow}
+\usepackage{setspace}
+\usepackage[headings]{fancyhdr}
+\usepackage[margin=10pt,font={small,stretch=0,9},labelfont=bf,labelsep=period,
+justification=centerlast]{caption}
+\usepackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{longtable}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{icomma}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+\usepackage{soulutf8} 
+\usepackage{etoolbox} 
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[normalem]{ulem}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg}
+\usepackage{indentfirst}
+\usepackage[T2A]{fontenc}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{multicol}
+\usepackage{lastpage}
+
+\pgfplotsset{
+  MyStyle1/.style={
+    axis lines = middle,
+    enlargelimits = true,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    minor tick num=5,
+    enlargelimits=0.05,
+    ticklabel style={font=\tiny,fill=white},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south east},
+  }
+}
+\def\Slope{1.5}
+\def\Intercept{-20}
+
+
+% Настройка отчёркиваний и нумерации
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\nouppercase{\leftmark\hfill}}
+\fancyfoot[RO, RE]{Страница \thepage \ из \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+	\textit{Федеральное государственное автономное образовательное\\ учреждение высшего образования }
+	
+	\vspace{0.5ex}
+	
+	\textbf{«Московский физико-технический институт\\ (национальный исследовательский университет)»}
+\end{center}
+
+\vspace{10ex}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width = 0.8\textwidth]{MIPT.png}
+  \end{center}
+\end{figure}
+
+\begin{center}
+	
+	\textbf{Лабораторная работа №}
+	
+	\vspace{1ex}
+	
+	по курсу общей физики
+	
+	на тему:
+	
+	\textbf{\textit{<<Название лабы>>}}
+	
+	\vspace{20ex}
+	
+	\begin{flushright}
+		\noindent
+		\textit{Работу выполнил:}\\  
+		\textit{Легких Никита \\(группа Б05-301)}
+	\end{flushright}
+	\vfill
+	Долгопрудный \\ \today
+	\setcounter{page}{1}
+\end{center}
+\newpage
+
+% Конец шаблона
+\newpage
+
+\textbf{Цель работы:}  \\ \\
+\textbf{В работе используются:} 
+\section*{Теоретическая справка} 
+
+\section*{Установка}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{схема установки}
+\label{fig:mpr}
+\end{figure}
+
+\section*{Задание}
+
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=,
+          height=,
+          xlabel={$B^2,~\text{Тл$^2$}$},
+          ylabel={$F,~\text{мкН}$},
+          MyStyle1,
+          ]
+          \draw[blue, domain=0:100] plot (\x,654.1824533677143*\x-3.1312150387823863);
+          \draw[red, domain=0:100] plot (\x,292.0293622242094*\x-6.727476137994188);
+          \addplot [only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=B2, y=Fal,
+                x error minus=B2err, x error plus=B2err, y error minus=Ferr, y error plus=Ferr, col sep=comma] {f(B^2).csv};
+          \addplot[purple, only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=B2, y=Fcu,
+                x error minus=B2err, x error plus=B2err, y error minus=Ferr, y error plus=Ferr, col sep=comma] {f(B^2).csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}
+
+
+\end{document}
