@@ -1,0 +1,609 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfplots}
+\usepackage[unicode, pdftex]{hyperref}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amsfonts,amsthm, mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{wrapfig}
+\usepackage{floatrow}
+\usepackage{setspace}
+\usepackage[headings]{fancyhdr}
+\usepackage[margin=10pt,font={small,stretch=0,9},labelfont=bf,labelsep=period,
+justification=centerlast]{caption}
+\usepackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{longtable}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{icomma}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+\usepackage{soulutf8} 
+\usepackage{etoolbox} 
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[normalem]{ulem}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg}
+\usepackage{indentfirst}
+\usepackage[T2A]{fontenc}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{multicol}
+\usepackage{lastpage}
+
+\pgfplotsset{
+  MyStyle1/.style={
+    axis lines = middle,
+    enlargelimits = true,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    minor tick num=5,
+    enlargelimits=0.05,
+    ticklabel style={font=\tiny,fill=white},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south east},
+  }
+}
+\def\Slope{1.5}
+\def\Intercept{-20}
+
+
+% Настройка отчёркиваний и нумерации
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\nouppercase{\leftmark\hfill}}
+\fancyfoot[RO, RE]{Страница \thepage \ из \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+	\textit{Федеральное государственное автономное образовательное\\ учреждение высшего образования }
+	
+	\vspace{0.5ex}
+	
+	\textbf{«Московский физико-технический институт\\ (национальный исследовательский университет)»}
+\end{center}
+
+\vspace{10ex}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width = 0.8\textwidth]{MIPT.png}
+  \end{center}
+\end{figure}
+
+\begin{center}
+	
+	\textbf{Лабораторная работа № 3.7.1}
+	
+	\vspace{1ex}
+	
+	по курсу общей физики
+	
+	на тему:
+	
+	\textbf{\textit{<<Скин-эффект в полом цилиндре>>}}
+	
+	\vspace{20ex}
+	
+	\begin{flushright}
+		\noindent
+		\textit{Работу выполнил:}\\  
+		\textit{Легких Никита \\(группа Б05-301)}
+	\end{flushright}
+	\vfill
+	Долгопрудный \\ \today
+	\setcounter{page}{1}
+\end{center}
+\newpage
+
+% Конец шаблона
+\newpage
+
+\textbf{Цель работы:} исследование проникновения переменного магнитного поля в медный полый цилиндр. \\ \\
+\textbf{В работе используются:} генератор звуковой частоты, соленоид, намотанный на полый цилиндрический каркас из диэлектрика, медный экран
+в виде трубки, измерительная катушка, амперметр, вольтметр, осциллограф.
+
+\section*{Теоретическая часть}
+\subsection*{Скин-эффект для полупространства}
+\vspace{1cm}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.2\textwidth]{3.7.1 Скин-эффект в полом цилиндре/pictures/poluprostranstvo.png}
+\caption{Скин-эффект в полупространстве}\label{fig:poluprostranstvo}
+\end{figure}
+Рассмотрим квазистационарное поле внутри проводящей среды в простейшем плоском случае.
+Пусть вектор $\vb*{E}$ направлен всюду вдоль оси $y$ (рис.\ref{fig:poluprostranstvo}) 
+и зависит только от координаты $x$, т. е. ${E_x} = {E_z} \equiv 0$, $E_y=E_y(x,t)$.
+В квазистационарном приближении 
+\begin{equation*}
+    \grad \times \vb*{H} = \sigma \vb*{E}
+\end{equation*}
+Берем ротор обоих частей
+\begin{equation*}
+    \grad \times (\grad \times \vb*{H}) = \grad(\grad \cdot \vb*{H}) - \grad^2\vb*{H} = \sigma \grad \times \vb*{E}
+\end{equation*}
+Используя ур-е Максвелла для ротора $\vb*{E}$ и для дивергенчии $\vb*{H}$ получаем
+\begin{equation}
+    \grad^2 \vb*{H} = \sigma\mu\mu_0\frac{\partial\vb*{H}}{\partial t} 
+                      + \grad(\grad \cdot \vb*{H}) = \sigma\mu\mu_0\frac{\partial\vb*{H}}{\partial t} 
+    \label{eq:laplacian_H}
+\end{equation}
+Берем ротор еще раз
+\begin{equation*}
+    \grad \times (\grad^2\vb*{H}) = \grad^2 (\grad \times \vb*{H}) =
+    \sigma\mu\mu_0 \frac{\partial (\grad \times \vb*{H})}{\partial t}
+\end{equation*}
+Осталось подставить первое ур-е, и воспользоватся уравнением Максвелла
+\begin{equation}
+    \grad^2\vb*{E}=\sigma\mu\mu_0 \frac{\partial \vb*{E}}{\partial t}\label{eq:diffusion}
+\end{equation}
+
+Подставляем в (\ref{eq:diffusion}) наше электрическое поле $E_y=E_y(x,t)$
+\begin{equation}
+    \frac{\partial^2 E_y}{\partial x^2} = \sigma\mu\mu_0\frac{\partial E_y}{\partial t}
+    \label{eq:diffusion_chastni}
+\end{equation}
+Если $E_y(0,t)=E_0 e^{i\omega t}$ то решением (\ref{eq:diffusion_chastni}) будет функция вида
+\begin{equation}
+    E_y(x,t)=E_0 e^{-x/\delta} e^{i(\omega t - x/\delta)}
+    \label{eq:skin_effect_poluprostranstvo}
+\end{equation}
+где
+\begin{equation}
+    \delta = \sqrt{\frac{2}{\omega\sigma\mu\mu_0}}
+    \label{eq:delta}
+\end{equation}
+
+\subsection*{Скин-эффект в тонком полом цилиндре}
+\begin{figure}[h]
+\begin{center}
+\begin{minipage}[h]{0.4\linewidth}
+\includegraphics[width=0.7\textwidth]{3.7.1 Скин-эффект в полом цилиндре/pictures/cilindr.png}
+\caption{Эл-магнитные поля в цилиндре}\label{fig:cilindr}
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.4\linewidth}
+\includegraphics[width=0.7\textwidth]{3.7.1 Скин-эффект в полом цилиндре/pictures/stenka.png}
+\caption{Стенка цилиндра}\label{fig:stenka}
+\end{minipage}
+\end{center}
+\end{figure}
+
+
+Перейдем теперь к описанию теории в нашей работе. Из соображении симметрии и 
+непрерывности соответствующих компонет векторов $\vb*{E}$ и $\vb*{H}$ можем сказать что
+\begin{equation*}
+    H_z = H(r)e^{i\omega t} \text{, } E_\varphi = E(r)e^{i\omega t}
+\end{equation*}
+и при этом функции $H(r)$ и $E(r)$ непрерывны.
+
+Внутри цилиндра токов нет, следовательно $H(r)=H_1=\text{const}$ внутри цилиндра.
+По теореме об электромагнитной индукции
+\begin{equation*}
+    E(r) = -\frac{1}{2}\mu_0 r \cdot i \omega H_1
+\end{equation*}
+откуда мы получаем граничное условие
+\begin{equation}
+    E_1=E(a)= -\frac{1}{2}\mu_0 a \cdot i \omega H_1
+    \label{eq:granichnoe_uslovie_E}
+\end{equation}
+
+В приближении $h \ll a$ можем пренебречь кривизной стенки и смоделировать 
+его бесконечной полосой. Тогда, надо решить уравнение (\ref{eq:laplacian_H})
+с граничными условиями. Решая уравнение получим связь полей $H_1$ 
+(поле внутри цилиндра которое мы будем измерять) и $H_2$, которое колеблется с частотой
+$\omega$
+
+\begin{equation}
+    H_1 = \frac{H_0}{\ch(\alpha h) + \frac{1}{2} \alpha a \sh(\alpha h)}, 
+    \text{\ где }
+    \alpha = \sqrt{i\omega \sigma \mu_0} = \frac{\sqrt{2}}{\delta}e^{i\pi/4}
+    \label{eq:svyaz_poley}
+\end{equation}
+
+из этой формулы получим сколько по фазе отстает поле $H_1$ от $H_0$.
+\begin{enumerate}
+    \item При $\delta \ll h$
+    (высокочастотная область): \\
+    \begin{equation}
+    \psi \approx \frac{\pi}{4} + \frac{h}{\delta} = 
+    \frac{\pi}{4} + h \sqrt{\frac{\omega \sigma \mu_0}{2}}
+    \label{eq:faza_high_freq}
+    \end{equation}
+    \item При $\delta \gg h$ (низкочастотная область) \\
+    \begin{equation}
+        tg\;\psi \approx \frac{ah}{\delta^2} = \pi a h \sigma \mu \mu_0 \nu
+        \label{eq:faza_low_freq}
+    \end{equation}
+
+\end{enumerate}
+
+\subsection*{Влияние скин-эффекта на индуктивность катушки}
+Из-за скин эффекта индуктивность соленоида с медным цилиндрическим экраном
+внутри будет зависеть от частоты тока. На высоких частотах магнитное поле не проникает внутрь соленоида (за экран), поэтому суммарный магнитный поток, пронизывающий катушку, уменьшается, и, соответственно, уменьшается и индуктивность. При низких частотах, когда толщина скин-слоя $\delta$ больше толщины медного экрана $h$, магнитное поле проникает внутрь катушки, однако его амплитуда падает (по формуле 
+\begin{equation}    
+\frac{|H_1|}{|H_0|} = \frac{1}{\sqrt{1 + \left(\frac{ah}{\delta^2} \right)^2}} = \frac{1}{\sqrt{1+ \frac{1}{4} (ah \sigma \mu_0 \omega)^2}})
+    \label{eq:|H_0|/|H_1|}
+\end{equation} и возникает разность фаз между колебаниями поля за экраном и перед ним (по формуле (\ref{eq:faza_low_freq})). Из-за чего также изменяется магнитный поток, а следовательно – и индуктивность.
+
+Рассмотрим магнитный поток через катушку как сумму двух магнитных потоков:\\ 1) пронизывающий область между катушкой и цилиндрическим экраном $\Phi_{out}$;\\ 2) пронизывающий область за экраном $\Phi_{in}$:
+\begin{equation}
+    \Phi = \Phi_{out} + \Phi_{in} = H_0 S_0 + H_1 S_1 = LI
+    \label{eq:potoki}
+\end{equation}
+Далее используя соотношения $L_{min} = \frac{\Phi_{out}}{I}$, $\Phi_{max} = L_{max}I_m = H_0(S_0 + S_1)$ и соединяем $\Phi_{in}$ с $\Phi_{out}$ с помощью произвольного тока $I$ и коефициента $n = \frac{H_0}{H_1} = \frac{|H_0|}{|H_1|} \frac{1}{cos(\psi)}$
+\begin{equation}
+    L = L_{min} + \frac{L_{max} - L_{min}}{n} \Rightarrow \frac{L_{max} - L}{L - L_{min}} = (\pi ah \mu_0 \sigma \nu)^2
+    \label{eq:inductivnost}
+\end{equation}
+Данная зависимость может быть аппроксимирована прямой, по углу наклона которой можно найти проводимость материала экрана $\sigma$.
+\newpage
+\subsection*{Процесс измерения}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{3.7.1 Скин-эффект в полом цилиндре/pictures/ustanovka.png}
+\caption{Установка}\label{fig:ustanovka}
+\end{figure}
+
+Магнитное поле внутри цилиндра измеряется катушкой 3. Напряжение на катушке
+пропорционалньна производной $\dot{B_1}(t)$
+\begin{equation*}
+    U(t) \propto \dot{B_1}(t) = -i\omega H_1 e^{i\omega t}
+\end{equation*}
+Поле внутри цилиндра пропорциональна току через соленоид
+\begin{equation*}
+    B_0(t) \propto I(t)
+\end{equation*}
+Отсюда несложно увидеть, что
+\begin{equation}
+    \frac{\abs{H_1}}{\abs{H_0}} = c \cdot \frac{U}{\nu I} = c \xi
+    \label{eq:otnoshenie_amplitud}
+\end{equation}
+\vspace{0.3cm}
+
+где константу можно определить из условия $\abs{H_1}/\abs{H_2} \rightarrow 1$ при
+$\nu \rightarrow 0$.
+
+\vspace{0.3cm}
+
+При измерениях разности фаз нужно учесть, что первый сигнал на осциллографе
+пропорционален магнитному полю снаружи, а второй пропорционален производному
+поля внутри цилиндра по времени. Вследствии этого набегает дополнительная фаза $\pi/2$,
+которую надо вычесть при измерениях.
+
+\section*{Задание}
+\subsection*{Выполнение}
+1) Рассчитаем опорное значение $\nu_h$, с глубиной проникновения $\delta = h = 1.5$ мм, считая что $\sigma \approx 5 \cdot 10^7$ См/м. \\
+Рассчет ведем по следующей формуле: 
+\begin{equation}
+    \delta = \sqrt{\frac{2}{\omega \sigma \mu_0}} \Rightarrow \nu_h = \frac{4 \pi}{\delta^2 \sigma \mu_0} = 2.2 \;\text{кГц}
+\end{equation}
+
+2) Собираем установку согласно приложениям.
+
+3) + 7) Снимаем требуемую зависимость $\xi = \frac{U}{\nu I}$ от частоты $\nu$. \\ 
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$U,$ В     & $I,$ А    & $\nu$, кГц   & $\xi \cdot 10^3$ & $1/\xi^2$ & $\nu^2$ \\ \hline
+0.137 & 0.449 & 22  & 13.82                                         & 5239                    & 484                   \\ \hline
+0.148 & 0.448 & 24  & 13.80                                         & 5254                    & 576                   \\ \hline
+0.160 & 0.448 & 26  & 13.77                                         & 5273                    & 676                   \\ \hline
+0.184 & 0.446 & 30  & 13.72                                         & 5313                    & 900                   \\ \hline
+0.212 & 0.442 & 35  & 13.71                                         & 5320                    & 1225                  \\ \hline
+0.240 & 0.442 & 40  & 13.56                                         & 5438                    & 1600                  \\ \hline
+0.292 & 0.436 & 50  & 13.37                                         & 5595                    & 2500                  \\ \hline
+0.383 & 0.424 & 70  & 12.89                                         & 6015                    & 4900                  \\ \hline
+0.487 & 0.405 & 100 & 12.03                                         & 6908                    & 10000                 \\ \hline
+0.538 & 0.393 & 120 & 11.42                                         & 7672                    & 14400                 \\ \hline
+0.594 & 0.377 & 150 & 10.49                                         & 9087                    & 22500                 \\ \hline
+0.621 & 0.369 & 170 & 9.90                                          & 10206                   & 28900                 \\ \hline
+0.641 & 0.362 & 190 & 9.34                                          & 11467                   & 36100                 \\ \hline
+0.658 & 0.355 & 210 & 8.81                                          & 12870                   & 44100                 \\ \hline
+0.670 & 0.350 & 230 & 8.33                                          & 14415                   & 52900                 \\ \hline
+\end{tabular}
+
+Построим график $\frac{1}{\xi^2} (\nu^2)$ и экстраполируем его до $\nu = 0$, получим угловой и свободный коефициент.
+
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.7\textwidth,
+          height=,
+          xlabel={$\nu^2$,$10^3\cdot$Гц$^2$},
+          ylabel={$\frac{1}{\xi^2}\cdot 10^3$},
+          MyStyle1,
+          ] 
+          \draw[blue, domain=0:100] plot (\x, 0.17508*\x+5.14971);
+          \addplot [purple, only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=nu_2_graph, y=xi_2_graph, col sep=comma]{csv/2.csv};
+        \end{axis}
+      \end{tikzpicture}
+      \label{gr:1/xi^2(nu^2)}
+\end{minipage}
+
+Угловой коефициент $k = (0.1751\pm0.0003)$
+
+Свободный коефициент $b = (5150\pm6)$
+
+
+
+\newpage
+4) + 8)Теперь снимаем зависимость $\xi$ от фазового сдвига $\psi$
+Малые частоты $\nu \in [0.05\nu_h, 0.5\nu_h]$ \\
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$x$, дел    & $x_0$, дел & $\nu$, Гц  & $\psi$, рад & $tg(\psi)$       \\ \hline
+1.4  & 4.6  & 110 & 0.61                     & 0.71                        \\ \hline
+1.1  & 3.9  & 130 & 0.68                     & 0.82                        \\ \hline
+0.9  & 3.3  & 150 & 0.71                     & 0.87                        \\ \hline
+0.7  & 3    & 170 & 0.84                     & 1.11                        \\ \hline
+0.6  & 2.6  & 190 & 0.85                     & 1.13                        \\ \hline
+0.5  & 2.5  & 200 & 0.94                     & 1.38                        \\ \hline
+0.4  & 2    & 250 & 0.94                     & 1.38                        \\ \hline
+0.4  & 2.4  & 300 & 1.05                     & 1.73                        \\ \hline
+0.4  & 2.9  & 350 & 1.14                     & 2.16                        \\ \hline
+0.3  & 2.5  & 400 & 1.19                     & 2.53                        \\ \hline
+0.25 & 2.5  & 500 & 1.26                     & 3.08                        \\ \hline
+\end{tabular}
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.55\textwidth,
+          height=,
+          xlabel={$\nu$, Гц},
+          ylabel={$tg(\psi)$},
+          MyStyle1,
+          ] 
+          \draw[blue, domain=0:1000] plot (\x, 0.0062*\x+0);
+          \addplot [purple, only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=nu, y=tgpsi, col sep=comma]{csv/4.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}\\
+
+Из графика получаем $k = (0.0064\pm0.0003)$.
+
+Для получения значения $\sigma$ используем формулу $tg(\psi) = \frac{ah}{\delta} = \pi a h \sigma \mu \mu_0 \nu \Rightarrow \sigma = \frac{k}{ \pi a h \mu \mu_0 \nu} = (2.3\pm0.1),\; 10^7 \cdot$ $\frac{\text{См}}{\text{м}}$.
+
+Сравнивая с табличным значением $\sigma = 6\; \frac{\text{См}}{\text{м}}$, понимаем что мы попали в порядок величины.
+
+5) Высокие частоты $\nu \in [0.5\nu_h, 15\nu_h]$: где тип 1 отвечает за измерение сдвига по фазе по эллипсу, тип 2 за измерение по смещению кривых, методы пересчета указаны в приложениях\\
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+тип & $\nu$    & $x$, дел & $x_0$, дел & $\psi - \pi/4$ & $\sqrt(\nu)$ \\ \hline
+1   & 600   & 0.4 & 2    & 0.99       & 24.5     \\ \hline
+1   & 700   & 0.7 & 4.9  & 0.93       & 26.5     \\ \hline
+1   & 800   & 0.5 & 4.8  & 0.89       & 28.3     \\ \hline
+1   & 900   & 0.3 & 4.6  & 0.85       & 30.0     \\ \hline
+1   & 1000  & 0.1 & 4.5  & 0.81       & 31.6     \\ \hline
+1   & 1120  & 0.1 & 4.2  & 0.81       & 33.5     \\ \hline
+1   & 1320  & 0.2 & 4.2  & 0.83       & 36.3     \\ \hline
+1   & 1560  & 0.4 & 3.9  & 0.89       & 39.5     \\ \hline
+1   & 1840  & 0.6 & 3.5  & 0.96       & 42.9     \\ \hline
+1   & 2170  & 0.7 & 3.2  & 1.01       & 46.6     \\ \hline
+1   & 2560  & 0.8 & 2.9  & 1.06       & 50.6     \\ \hline
+1   & 3120  & 0.9 & 2.5  & 1.15       & 55.9     \\ \hline
+1   & 3570  & 1   & 2.3  & 1.24       & 59.7     \\ \hline
+1   & 4210  & 1   & 1.9  & 1.34       & 64.9     \\ \hline
+1   & 6920  & 0.9 & 1.2  & 1.63       & 83.2     \\ \hline
+2   & 8160  & 1   & 3.2  & 1.77       & 90.3     \\ \hline
+2   & 9630  & 1   & 2.7  & 1.95       & 98.1     \\ \hline
+2   & 11360 & 0.9 & 2.1  & 2.13       & 106.6    \\ \hline
+2   & 13410 & 1.8 & 3.7  & 2.31       & 115.8    \\ \hline
+2   & 15820 & 1.8 & 3.2  & 2.55       & 125.8    \\ \hline
+2   & 18670 & 1.7 & 2.6  & 2.84       & 136.6    \\ \hline
+2   & 22030 & 1.2 & 4.2  & 3.03       & 148.4    \\ \hline
+2   & 26000 & 0.7 & 3.9  & 3.36       & 161.2    \\ \hline
+\end{tabular}\\
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.7\textwidth,
+          height=,
+          xlabel={$\sqrt{\nu}$, Гц$^{1/2}$},
+          ylabel={$\psi - \pi/4$},
+          MyStyle1,
+          ] 
+          \draw[blue, domain=0:200] plot (\x, 0.205*\x);
+          \addplot [purple, only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=sqrt_nu, y=psi_pi_4, col sep=comma]{csv/5.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}\\
+
+Наилучшая прямая выглядит следующим образом: $\psi - \frac{\pi}{4} = k \cdot \sqrt{\nu}$, где из графика $k = (0.0205\pm0.0008)$
+
+6) Собираем схему из приложения и снимаем зависимость $L(\nu)$, используя диапазон $\nu \in [\nu_{min}, 10\nu_h]$, где $\nu_{min} = 40$ Гц. \\\begin{tabular}{|c|c|}
+\hline
+$L$, мГн    & $\nu$, Гц    \\ \hline
+16.60 & 40    \\ \hline
+16.10 & 50    \\ \hline
+15.70 & 60    \\ \hline
+15.20 & 75    \\ \hline
+13.90 & 100   \\ \hline
+11.40 & 150   \\ \hline
+7.60  & 250   \\ \hline
+5.00    & 400   \\ \hline
+3.90  & 600   \\ \hline
+3.50  & 800   \\ \hline
+2.70  & 1500  \\ \hline
+2.60  & 2000  \\ \hline
+2.61 & 3000  \\ \hline
+2.71 & 4000  \\ \hline
+3.01 & 6000  \\ \hline
+3.16 & 7500  \\ \hline
+3.26 & 12000 \\ \hline
+3.73 & 15000 \\ \hline
+4.55 & 20000 \\ \hline
+\end{tabular}
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.7\textwidth,
+          height=,
+          xlabel={$\nu$, кГц},
+          ylabel={$L$, мГн},
+          MyStyle1,
+          ] 
+          \addplot [purple, only marks] plot [error bars/.cd,
+                x dir=both, x fixed = 0.05,
+                y dir=both, y explicit,
+                      ] table [
+                      x=nu, y=L, col sep=comma]{csv/6.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}
+
+Из данного графика видно, что $L_{max} = L | _{\nu \rightarrow 0} \approx 17$ мГн, $L_{min} \approx 2.6$ мГн.
+
+\subsection*{Обработка результатов}
+9) график построен в 5) пункте и получено что $k = (0.0205\pm0.0008)$. Из формулы (\ref{eq:faza_high_freq}) $\Rightarrow \sigma = \frac{k^2}{\pi h^2 \mu_0}  = (4.7\pm0.1)\cdot 10^7 \frac{\text{См}}{\text{м}}$
+
+10) из графика пункта 6) $L_{max} = 17$ мГн, $L_{min} = 2.6$ мГн.\\
+\begin{tabular}{|c|c|}
+\hline
+$\frac{L_{max}-L}{L-L_{min}}$    & $\nu^2$, кГц$^2$ \\ \hline
+0.00  & 0.0016                \\ \hline
+0.04  & 0.0025                \\ \hline
+0.07  & 0.0036                \\ \hline
+0.11  & 0.0056                \\ \hline
+0.24  & 0.0100                \\ \hline
+0.59  & 0.0225                \\ \hline
+1.80  & 0.0625                \\ \hline
+4.83  & 0.1600                \\ \hline
+9.77  & 0.3600                \\ \hline
+14.56 & 0.6400                \\ \hline
+\end{tabular}
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+          width=0.7\textwidth,
+          height=,
+          xlabel={$\nu^2$, кГц$^2$},
+          ylabel={$\frac{L_{max} - L}{L - L_{min}}$},
+          MyStyle1,
+          ] 
+          \draw[blue, domain=0:10] plot (\x, 27*\x);
+          \addplot [purple, only marks] table [
+                      x=nu_2, y=l, col sep=comma]{csv/10.csv};
+        \end{axis}
+      \end{tikzpicture}
+\end{minipage}\\
+По наклону линейной части получаем: $k = (27\pm7)$, откуда $\sigma = \frac{\sqrt{k}}{\pi h a \mu_0} = (1.9\pm0.2), 10^7\cdot\frac{\text{См}}{\text{м}}$, получаем значение дальше всего от табличного.\\
+11) создаем таблицу получившихся проводимостей\\
+\begin{tabular}{|c|c|l|l|l|}
+\hline
+ & $tg\psi (\nu)$ & $(\psi - \frac{\pi}{4})(\sqrt{\nu})$ & $\frac{L_{max}-L}{L-L_{min}} (\nu^2)$ & табличное \\ \hline
+ & $(2.3\pm0.1)$ & $(4.7\pm0.1)$ & $(1.9\pm0.2)$ & 6 \\ \hline
+\end{tabular}
+
+12) 
+\begin{tabular}{|c|c|}
+\hline
+$\frac{|H_1|}{|H_0|}$     & $\nu$, Гц  \\ \hline
+0.996 & 22  \\ \hline
+0.995 & 24  \\ \hline
+0.993 & 26  \\ \hline
+0.989 & 30  \\ \hline
+0.989 & 35  \\ \hline
+0.978 & 40  \\ \hline
+0.964 & 50  \\ \hline
+0.930 & 70  \\ \hline
+0.868 & 100 \\ \hline
+0.823 & 120 \\ \hline
+0.756 & 150 \\ \hline
+0.714 & 170 \\ \hline
+0.673 & 190 \\ \hline
+0.636 & 210 \\ \hline
+0.601 & 230 \\ \hline
+0.568 & 250 \\ \hline
+0.499 & 300 \\ \hline
+0.442 & 350 \\ \hline
+0.396 & 400 \\ \hline
+0.326 & 500 \\ \hline
+0.276 & 600 \\ \hline
+0.239 & 700 \\ \hline
+\end{tabular}
+\begin{tabular}{|c|c|}
+\hline
+$\frac{|H_1|}{|H_0|}$     & $\nu$, Гц  \\ \hline
+0.210 & 800   \\ \hline
+0.188 & 900   \\ \hline
+0.169 & 1000  \\ \hline
+0.151 & 1120  \\ \hline
+0.129 & 1320  \\ \hline
+0.109 & 1560  \\ \hline
+0.092 & 1840  \\ \hline
+0.078 & 2170  \\ \hline
+0.066 & 2560  \\ \hline
+0.055 & 3020  \\ \hline
+0.046 & 3570  \\ \hline
+0.039 & 4210  \\ \hline
+0.033 & 4970  \\ \hline
+0.022 & 6920  \\ \hline
+0.018 & 8160  \\ \hline
+0.015 & 9630  \\ \hline
+0.012 & 11360 \\ \hline
+0.010 & 13410 \\ \hline
+0.008 & 15820 \\ \hline
+0.007 & 18670 \\ \hline
+0.006 & 22030 \\ \hline
+0.006 & 26000 \\ \hline
+\end{tabular}
+\begin{minipage}{1\textwidth}
+      \begin{tikzpicture}
+        \begin{semilogxaxis}[
+          width=0.6\textwidth,
+          height=,
+          xlabel={$\nu$, Гц},
+          ylabel={$\frac{|H_1|}{|H_0|}$},
+          ] 
+          \addplot [purple, only marks] table [
+                      x=nu, y=H1/H0, col sep=comma]{csv/12.csv};
+        \end{semilogxaxis}
+      \end{tikzpicture}
+\end{minipage}
+
+
+\end{document}

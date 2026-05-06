@@ -1,0 +1,313 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfplots}
+\usepackage[unicode, pdftex]{hyperref}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amsfonts,amsthm, mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{wrapfig}
+\usepackage{floatrow}
+\usepackage{setspace}
+\usepackage[headings]{fancyhdr}
+\usepackage[margin=10pt,font={small,stretch=0,9},labelfont=bf,labelsep=period,
+justification=centerlast]{caption}
+\usepackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{longtable}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{icomma}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+\usepackage{soulutf8} 
+\usepackage{etoolbox} 
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[normalem]{ulem}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg}
+\usepackage{indentfirst}
+\usepackage[T2A]{fontenc}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{multicol}
+\usepackage{lastpage}
+
+\pgfplotsset{
+  MyStyle1/.style={
+    axis lines = middle,
+    enlargelimits = true,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    minor tick num=5,
+    enlargelimits=0.05,
+    ticklabel style={font=\tiny,fill=white},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south east},
+  }
+}
+\def\Slope{1.5}
+\def\Intercept{-20}
+
+
+% Настройка отчёркиваний и нумерации
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\nouppercase{\leftmark\hfill}}
+\fancyfoot[RO, RE]{Страница \thepage \ из \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+	\textit{Федеральное государственное автономное образовательное\\ учреждение высшего образования }
+	
+	\vspace{0.5ex}
+	
+	\textbf{«Московский физико-технический институт\\ (национальный исследовательский университет)»}
+\end{center}
+
+\vspace{10ex}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width = 0.8\textwidth]{MIPT.png}
+  \end{center}
+\end{figure}
+
+\begin{center}
+	
+	\textbf{Лабораторная работа № 3.3.6}
+	
+	\vspace{1ex}
+	
+	по курсу общей физики
+	
+	на тему:
+	
+	\textbf{\textit{<<Влияние магнитного поля на проводимость полупроводников>>}}
+	
+	\vspace{20ex}
+	
+	\begin{flushright}
+		\noindent
+		\textit{Работу выполнил:}\\  
+		\textit{Легких Никита \\(группа Б05-301)}
+	\end{flushright}
+	\vfill
+	Долгопрудный \\ \today
+	\setcounter{page}{1}
+\end{center}
+\newpage
+
+% Конец шаблона
+\newpage
+
+\textbf{Цель работы:} измерение зависимости сопротивления полупроводниковых образцов различной формы от индукции магнитного поля. \\ \\
+\textbf{В работе используются:} электромагнит, миллитесламетр (на основе датчика Холла), вольтметр, амперметр, миллиамперметр, реостат, образцы монокристаллического антимонида индия (InSb) $n$-типа.
+
+\section*{Теоретическая справка}
+В работе изучается зависимость проводимости полупроводников от величины магнитного поля $B$ в геометрии диска Корбино. По диску, помещённому в перпендикулярное ему магнитное поле, пропускается ток в радиальном направлении. Магнитное поле искривляет линии тока, благодаря чему эффективное сопротивление $R$ образца возрастает (эффект геометрического магнетосопротивления). По результатам измерений зависимости $R(B)$ могут быть вычислены подвижность и концентрация носителей тока в образце.\\
+В схеме Корбино электрическое поле направлено по радиусу системы. В перпендикулярном диску магнитном поле ток вынужден протекать под углом к электрическому полю, то есть линии тока представляют собой спирали. Дополнительное (холловское) электрическое поле при этом не возникает.
+Ввиду симметрии системы вклад в полный ток даёт только радиальная компонента плотности тока $j_r = \sigma_r E_r$. Полный ток равен $I = j_r \cdot 2\pi rh$, где $r$ — радиус диска, $h$ — его толщина. Если в системе присутствует один тип носителей, то проводимость в радиальном направлении $\sigma_r$ соответствует компоненте $\sigma_{xx}$ тензора проводимости:
+\begin{equation*}
+    \sigma_r = \frac{\sigma_0}{1 + (\mu B)^2},
+\end{equation*}
+где $\mu$ — подвижность носителей.\\
+Напряжение между центром и краем диска равно
+\begin{equation*}
+    U = \int\limits_{r_1}^{r_2} E_r dr = \frac{1}{\sigma_r}\int\limits_{r_1}^{r_2} \frac{I}{2 \pi rh} dr = \frac{\sigma_r}{\sigma_0} R_0 I, 
+\end{equation*}
+где $R_0 = \frac{1}{\sigma_0 2\pi rh} \ln \frac{r_2}{r_1}$ — сопротивление диска в отсутствие магнитного поля. Поэтому закон Ома в схеме Корбино можно записать как
+\begin{equation*}
+    U = IR_0 (1 + (\mu B)^2).
+\end{equation*}
+Таким образом, в данной схеме появляется зависимость сопротивления образца от магнитного поля. Причина — в геометрии системы: магнитное поле искривляет линии тока, делая их длиннее. Такой эффект и называют геометрическим магнетосопротивлением.
+\section*{Экспериментальная установка}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{3.3.6 Влияние магнитного поля на проводимость полупроводников/1.png}
+    \caption{Схема установки для исследования влияния магнитного поля на проводимость полупроводников}
+    \label{ustanovka}
+\end{figure}
+
+\section*{Результаты измерений и обработка данных}
+\subsection*{Калибровка электромагнита}
+Исследуем зависимость индукции $B$ магнитного поля в зазоре от тока $I_{\text{м}}$ через обмотки магнита с помощью измерителя магнитной индукции. Результаты внесем в таблицу ниже:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$B$, мТл & $\sigma_{B}$, мТл & $I_{\text{м}}$, А & $\sigma_{I_{\text{м}}}$, А  \\ \hline
+10,18 & 0,15 & 0    & 0,02  \\ \hline
+76,1  & 1,1  & 0,08 & 0,02  \\ \hline
+157,8 & 2,4  & 0,16 & 0,02  \\ \hline
+235   & 4    & 0,24 & 0,02  \\ \hline
+300   & 5    & 0,32 & 0,02  \\ \hline
+342   & 5    & 0,40 & 0,02  \\ \hline
+364   & 5    & 0,48 & 0,02  \\ \hline
+382   & 6    & 0,56 & 0,02  \\ \hline
+\end{tabular}
+\caption{Результаты калибровки электромагнита}
+\end{table}
+\noindent Погрешность измерений $B$ составила 1,5 \% измеряемой величины, погрешность $I_{\text{м}}$ же равна 0,5 \% измеряемой величины $\pm$ 2 единицы младшего порядка. Посчитаем данные погрешности и результаты также внесем в таблицу.\\
+На основании полученных данных построим график зависимости $B(I_{\text{м}})$:
+\begin{figure}[H]
+    \center{\includegraphics[width=0.86\textwidth]{3.3.6 Влияние магнитного поля на проводимость полупроводников/2.png}}
+\end{figure}
+\subsection*{Исследование магнитосопротивления \\ диска Корбино}
+Запишем параметры используемого диска:\\
+$D = 18$ мм, $d = 3$ мм, $h = 1,8$ мм.\\
+Подключим диск Корбино к электрической цепи, установим ток через образец $I_0 = 23$ мА. Падение напряжения на образце в отсутствие магнитного поля составит $U_0 = 0,760$ мВ.\\
+Вставив держатель с диском в зазор электромагнита, снимем зависимость напряжения $U$ на образце от тока $I_{\text{м}}$ обмотки магнита при фиксированном токе через образец. Результаты измерений внесем в таблицу ниже:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$U$, мВ & $\sigma_{U}$, мВ & $I_{\text{м}}$, А & $\sigma_{I_{\text{м}}}$, А \\ \hline
+0,889 & 0,04 & 0,08 & 0,02 \\ \hline
+1,321 & 0,04 & 0,16 & 0,02 \\ \hline
+1,917 & 0,04 & 0,24 & 0,02 \\ \hline
+2,509 & 0,04 & 0,32 & 0,02 \\ \hline
+2,976 & 0,04 & 0,40 & 0,02 \\ \hline
+3,272 & 0,04 & 0,48 & 0,02 \\ \hline
+3,47  & 0,04 & 0,56 & 0,02 \\ \hline
+\end{tabular}
+\caption{Результаты измерений для диска Корбино}
+\end{table}
+\noindent Погрешность измерений $U$ составила 0,005 \% измеряемой величины $\pm$ 35 единиц младшего порядка, погрешность $I_{\text{м}}$ же равна 0,5 \% измеряемой величины $\pm$ 2 единицы младшего порядка. Посчитаем данные погрешности и результаты также внесем в таблицу.\\
+Проверим, что результат измерений не зависит от направления магнитного поля, перевернув образец:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+$U$, мВ & $I_{\text{м}}$, А \\ \hline
+0,890 & 0,08 \\ \hline
+1,320 & 0,16 \\ \hline
+1,916 & 0,24 \\ \hline
+\end{tabular}
+\caption{Результаты измерений для перевернутого образца}
+\end{table}
+\noindent Как видно из таблицы выше, результаты измерений с двух сторон с больной точностью совпадают, что подтверждает данное предположение.\\
+Проведем необходимую обработку данных:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$(U - U_0)/U_0$  & $\sigma_{(U - U_0)/U_0}$ & $B^2$, $\text{Тл}^2$ & $\sigma_{B^2}$, $\text{Тл}^2$ \\ \hline
+0,170 & 0,013 & 0,00579 & 0,00012 \\ \hline
+0,74 & 0,05 & 0,0249 & 0,0005 \\ \hline
+1,52 & 0,10 & 0,0552 & 0,0012 \\ \hline
+2,30 & 0,15 & 0,0900 & 0,0019 \\ \hline
+2,92 & 0,19 & 0,1170 & 0,0025 \\ \hline
+3,31 & 0,22 & 0,1325 & 0,0028 \\ \hline
+3,57 & 0,24 & 0,1459 & 0,003  \\ \hline
+\end{tabular}
+\caption{Обработка результатов для диска Корбино}
+\end{table}
+\subsection*{Исследование магнитосопротивления пластинки}
+Подключим к электрической цепи образец, имеющий форму пластинки, установим ток через образец $I_0 = 10$ мА. Падение напряжения на образце в отсутствие магнитного поля составит $U_0 = 0,668$ мВ.\\
+Вставив держатель с образцом в зазор электромагнита, снимем зависимость напряжения $U$ на нем от тока $I_{\text{м}}$ обмотки магнита при фиксированном токе через образец (два раза - один раз направив пластинку по ширине вдоль поля, а во второй - поперек). Результаты измерений внесем в таблицы ниже:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$U$, мВ & $\sigma_{U}$, мВ & $I_{\text{м}}$, А & $\sigma_{I_{\text{м}}}$, А \\ \hline
+0,698 & 0,04 & 0,08 & 0,02 \\ \hline
+0,753 & 0,04 & 0,16 & 0,02 \\ \hline
+0,821 & 0,04 & 0,24 & 0,02 \\ \hline
+0,884 & 0,04 & 0,32 & 0,02 \\ \hline
+0,925 & 0,04 & 0,4  & 0,02 \\ \hline
+0,953 & 0,04 & 0,48 & 0,02 \\ \hline
+0,97  & 0,04 & 0,56 & 0,02 \\ \hline
+\end{tabular}
+\caption{Результаты измерений для пластинки (вдоль поля)}
+\end{table}
+\noindent Погрешность измерений $U$ составила 0,005 \% измеряемой величины $\pm$ 35 единиц младшего порядка, погрешность $I_{\text{м}}$ же равна 0,5 \% измеряемой величины $\pm$ 2 единицы младшего порядка. Посчитаем данные погрешности и результаты также внесем в таблицы.
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$U$, мВ & $\sigma_{U}$, мВ & $I_{\text{м}}$, А & $\sigma_{I_{\text{м}}}$, А \\ \hline
+0,731 & 0,04 & 0,08 & 0,02 \\ \hline
+0,869 & 0,04 & 0,16 & 0,02 \\ \hline
+1,03  & 0,04 & 0,24 & 0,02 \\ \hline
+1,185 & 0,04 & 0,32 & 0,02 \\ \hline
+1,292 & 0,04 & 0,4  & 0,02 \\ \hline
+1,356 & 0,04 & 0,48 & 0,02 \\ \hline
+1,403 & 0,04 & 0,56 & 0,02 \\ \hline
+\end{tabular}
+\caption{Результаты измерений для пластинки (поперек поля)}
+\end{table}
+Проведем необходимую обработку данных:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{$(U - U_0)/U_0$}  & \multicolumn{1}{c|}{$\sigma_{(U - U_0)/U_0}$} & \multicolumn{1}{c|}{$B^2$, $\text{Тл}^2$} & $\sigma_{B^2}$, $\text{Тл}^2$ \\ \hline
+\multicolumn{4}{|c|}{Вдоль} \\ \hline
+\multicolumn{1}{|c|}{0,045} & \multicolumn{1}{c|}{0,004} & \multicolumn{1}{c|}{0,00579} & 0,00012 \\ \hline
+\multicolumn{1}{|c|}{0,127}   & \multicolumn{1}{c|}{0,011}   & \multicolumn{1}{c|}{0,0249} & 0,0005 \\ \hline
+\multicolumn{1}{|c|}{0,229}  & \multicolumn{1}{c|}{0,020}  & \multicolumn{1}{c|}{0,0552}   & 0,0011   \\ \hline
+\multicolumn{1}{|c|}{0,323}  & \multicolumn{1}{c|}{0,027}  & \multicolumn{1}{c|}{0,0900}       & 0,0019  \\ \hline
+\multicolumn{1}{|c|}{0,38}  & \multicolumn{1}{c|}{0,03}  & \multicolumn{1}{c|}{0,1170}   & 0,0025  \\ \hline
+\multicolumn{1}{|c|}{0,43}  & \multicolumn{1}{c|}{0,04}  & \multicolumn{1}{c|}{0,1325}   & 0,0028  \\ \hline
+\multicolumn{1}{|c|}{0,45}  & \multicolumn{1}{c|}{0,04}  & \multicolumn{1}{c|}{0,146}   & 0,003  \\ \hline
+\multicolumn{4}{|c|}{Поперек} \\ \hline
+\multicolumn{1}{|c|}{0,094} & \multicolumn{1}{c|}{0,008} & \multicolumn{1}{c|}{0,00579} & 0,00012 \\ \hline
+\multicolumn{1}{|c|}{0,301}  & \multicolumn{1}{c|}{0,025}  & \multicolumn{1}{c|}{0,0249} & 0,0005 \\ \hline
+\multicolumn{1}{|c|}{0,54}  & \multicolumn{1}{c|}{0,04}  & \multicolumn{1}{c|}{0,0552}   & 0,0012   \\ \hline
+\multicolumn{1}{|c|}{0,77}  & \multicolumn{1}{c|}{0,06}  & \multicolumn{1}{c|}{0,0900}       & 0,0019  \\ \hline
+\multicolumn{1}{|c|}{0,93}  & \multicolumn{1}{c|}{0,07}  & \multicolumn{1}{c|}{0,1170}   & 0,0025  \\ \hline
+\multicolumn{1}{|c|}{1,03}    & \multicolumn{1}{c|}{0,08}  & \multicolumn{1}{c|}{0,1325}   & 0,0028  \\ \hline
+\multicolumn{1}{|c|}{1,10}   & \multicolumn{1}{c|}{0,09}  & \multicolumn{1}{c|}{0,146}   & 0,003  \\ \hline
+\end{tabular}
+\caption{Обработка результатов для пластинки}
+\end{table}
+\subsection*{Сравнение результатов}
+На основании полученных данных построим график зависимости $\frac{U - U_0}{U_0}$($B^2$) для всех серий измерений:
+\begin{figure}[H]
+    \center{\includegraphics[width=0.8\textwidth]{3.3.6 Влияние магнитного поля на проводимость полупроводников/3.png}}
+\end{figure}
+\noindent На графике синим цветом отражены измерения для диска Корбино, красным - для пластинки, направленной вдоль поля, а зеленым - для пластинки, направленной поперек поля.\\
+Как видно из графика, сопротивление пластинки зависит от ориентации ее в поле.\\
+С помощью МНК найдем коэффициент наклона прямой для диска Корбино:\\
+$k = (24,0 \pm 0,5)$ $\text{Тл}^{-2}$\\
+Исходя из этого найдем подвижность носителей:\\
+$\mu = \sqrt{k} = (4,90 \pm 0,13)$ $\text{Тл}^{-1}$.\\
+Также, исходя из эксперементальных данных, найдем:\\
+- сопротивление диска в отсутствие магнитного поля: $R_0 = \frac{U_0}{I_0} = (0,0330 \pm 0,0019) $ Ом;\\
+- удельную проводимость: $\sigma_0 = \frac{1}{2\pi h R_0} \ln \frac{D}{d} = (4800 \pm 280)$ $(\text{Ом} \cdot \text{м})^{-1}$;\\
+- концентрацию носителей тока: $n = \frac{\sigma_0}{q \mu} = (6,1 \pm 0,4) \cdot 10^{21}$ ${\text{м}}^{-3}$.
+\section*{Выводы}
+В ходе лабораторной работы удалось измерить зависимости сопротивления полупроводниковых образцов различной формы от индукции магнитного поля, а также получить значение подвижности носителей ($\mu = (4,90 \pm 0,13)$ $\text{Тл}^{-1}$, $\mu_{\text{теор}} = 7,7$ $\text{Тл}^{-1}$), удельную проводимость ($\sigma_0 = (4800 \pm 280)$ $(\text{Ом} \cdot \text{м})^{-1}$, $\sigma_{0\text{теор}} = 2200$ $(\text{Ом} \cdot \text{м})^{-1}$) и концентрации носителей тока ($n = (6,1 \pm 0,4) \cdot 10^{21}$ ${\text{м}}^{-3}$, $n_{\text{теор}} = 17,8 \cdot 10^{21}$ ${\text{м}}^{-3}$) и сравнить данные значения с теоретическими. Отметим, что они сходятся по порядку величины, однако не совпадают.
+
+\end{document}

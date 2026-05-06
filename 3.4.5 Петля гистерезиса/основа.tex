@@ -1,0 +1,556 @@
+\documentclass[a4paper,12pt]{extarticle}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfplots}
+\usepackage[unicode, pdftex]{hyperref}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian, english]{babel}
+\usepackage{amsmath,amsfonts,amsthm, mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{wrapfig}
+\usepackage{svg}
+\usepackage{floatrow}
+\usepackage{setspace}
+\usepackage[headings]{fancyhdr}
+\usepackage[margin=10pt,font={small,stretch=0,9},labelfont=bf,labelsep=period,
+justification=centerlast]{caption}
+\usepackage{array,tabularx,tabulary,booktabs}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{longtable}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{icomma}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+\usepackage{soulutf8} 
+\usepackage{etoolbox} 
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=20mm}
+\geometry{right=20mm}
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage[normalem]{ulem}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg}
+\usepackage{indentfirst}
+\usepackage[T2A]{fontenc}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{tabularx}
+\usepackage{floatrow}
+\usepackage{multicol}
+\usepackage{lastpage}
+
+\pgfplotsset{
+  MyStyle1/.style={
+    axis lines = middle,
+    enlargelimits = true,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    minor tick num=5,
+    enlargelimits=0.05,
+    ticklabel style={font=\tiny,fill=white},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north west},
+    ylabel style={at={(ticklabel* cs:1)},anchor=south east},
+  }
+}
+\def\Slope{1.5}
+\def\Intercept{-20}
+
+
+% Настройка отчёркиваний и нумерации
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\nouppercase{\leftmark\hfill}}
+\fancyfoot[RO, RE]{Страница \thepage \ из \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+\thispagestyle{empty}
+\begin{center}
+	\textit{Федеральное государственное автономное образовательное\\ учреждение высшего образования }
+	
+	\vspace{0.5ex}
+	
+	\textbf{«Московский физико-технический институт\\ (национальный исследовательский университет)»}
+\end{center}
+
+\vspace{10ex}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width = 0.8\textwidth]{MIPT.png}
+  \end{center}
+\end{figure}
+
+\begin{center}
+	
+	\textbf{Лабораторная работа № 3.4.5}
+	
+	\vspace{1ex}
+	
+	по курсу общей физики
+	
+	на тему:
+	
+	\textbf{\textit{<<Петля гистерезиса>>}}
+	
+	\vspace{20ex}
+	
+	\begin{flushright}
+		\noindent
+		\textit{Работу выполнил:}\\  
+		\textit{Легких Никита \\(группа Б05-301)}
+	\end{flushright}
+	\vfill
+	Долгопрудный \\ \today
+	\setcounter{page}{1}
+\end{center}
+\newpage
+
+
+\setcounter{page}{2} %это нумерация страницы
+\let \savenumberline \numberline
+\def \numberline#1{\savenumberline{#1.}}
+\bigskip
+
+% Конец шаблона
+\newpage
+
+\textbf{Цель работы:} изучение петель гистерезиса различных ферромагнитных
+материалов в переменных полях.
+
+\textbf{В работе используются:} автотрансформатор, понижающий трансформатор, интегрирующая цепочка, амперметр, вольтметр, электронный
+осциллограф, делитель напряжения, тороидальные образцы с двумя обмотками.
+
+
+\section*{Теоретические сведения}
+
+Основные характеристики
+ферромагнетиков — их коэрцитивное поле $H_c$, магнитная проницаемость
+$\mu$, рассеиваемая в виде тепла при перемагничивании мощность — зависят
+от частоты перемагничивающего поля. В данной работе кривые гистерезиса ферромагнитных материалов изучаются в поле частоты $\nu_0 =$ 50 Гц
+с помощью электронного осциллографа.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{3.4.5 Петля гистерезиса/pictures/gist3.jpg}
+	\caption{Петля гистерезиса ферромагнетика}
+	\label{fig:petlya}
+\end{figure}
+
+Магнитная индукция $ B $ и напряжённость поля $ H $ в ферромагнитном материале неоднозначно связаны между собой: индукция зависит
+не только от напряжённости, но и от предыстории образца. Связь между $ B $ и $ H $ типичного ферромагнетика иллюстрирует рис. $\ref{fig:petlya}$.
+
+Если к ферромагнитному образцу прикладывать переменное внешнее
+магнитное поле, то его состояние на плоскости $ B-H $ будет изменяться
+по замкнутой кривой — петле гистерезиса. Размер петли определяется
+максимальным значением напряжённости $ H $ в цикле (например, петля $ AA' $,
+обозначенная пунктиром на рис. $\ref{fig:petlya}$). Если амплитуда напряжённости достаточно велика, то образец будет периодически достигать насыщения,
+что на рисунке соответствует кривой $ CEFC'E'F'C $ (предельная петля
+гистерезиса). Пересечение предельной петли с вертикальной осью соответствует остаточной индукции $B_r$, пересечение с горизонтальной осью
+— коэрцитивному полю $H_c$. Крайние точки петель, соответствующие амплитудным значениям $ H $ (например, точка $ A $ на рис. $\ref{fig:petlya}$), лежат на начальной кривой намагничивания ($ OAC $).
+
+\textbf{Измерение магнитной индукции.} Магнитную индукцию $ B $ удобно
+определять с помощью ЭДС, возникающей при изменении магнитного
+потока $ \Phi $ в катушке, намотанной на образец. Пусть катушка c $ N $ витками плотно охватывает образец сечением $ S $, и индукция $ B $ в образце
+однородна. Тогда
+
+\begin{equation}
+|B|=\frac{1}{SN}\int\mathcal{E} dt.
+\label{eq:|B|}
+\end{equation}
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.3\linewidth]{3.4.5 Петля гистерезиса/pictures/gist2.jpg}
+    \caption{Интегрирующая ячейка}
+	\label{fig:int}
+\end{figure}
+
+Для интегрирования в работе используется интегрирующая $ RC $-цепочка (рис. $ \ref{fig:int} $).
+«Входное» напряжение от источника $U_{\text{вх}}(t)$ подаётся на последовательно соединённые резистор $R_\text{и}$ и конденсатор $C_\text{и}$. <<Выходное>>
+напряжение $U_{\text{вых}}(t)$ снимается с конденсатора. Предположим, что 1) сопротивление источника мало по сравнению с $R_\text{и}$, 2) выходное сопротивление (сопротивление на входе осциллографа), напротив, велико: $R_{\text{вых}}$ $ \gg $ $R_\text{и}$ и, наконец, 3) сопротивление $R_\text{и}$ достаточно велико, так что почти всё падение напряжения приходится на него, а $U_{\text{вых}}$ $\ll$ $U_{\text{вх}}$. В таком случае ток цепи равен I = ($U_{\text{вх}}$ - $U_{\text{вых}}$)/$R_\text{и}$ $\approx$ $U_{\text{вх}}$/$R_\text{и}$, и входное и выходное сопротивление связаны соотношением
+\begin{equation}
+U_{\text{вых}} = \frac{q}{C_\text{и}} = \frac{1}{C_\text{и}}\int\limits_0^t Idt \approx \frac{1}{\tau_\text{и}} \int\limits_0^t U_{\text{вх}}dt,
+\label{eq:U_ext}
+\end{equation}
+где $\tau_\text{и}=R_\text{и}C_\text{и}$ - постоянная времени $ RC $ - цепочки. Для индукции поля из ($\ref{eq:|B|}$) получаем 
+\begin{equation}
+|B|=\frac{1}{SN}\int U_{\text{вх}} dt=\frac{\tau_\text{и}}{SN}U_{\text{вых}}.
+\label{eq:|B|new}
+\end{equation}
+
+\textbf{Замечание.} Уточним критерий применимости соотношения ($\ref{eq:U_ext}$). Пусть на вход интегрирующей ячейки подан синусоидальный сигнал с частотой $\omega_0$. Тогда, пользуясь методом комплексных амплитуд, нетрудно найти отношение амплитуд входного и выходного напряжений:
+\begin{equation}
+\frac{U_{\text{вых}}}{U_{\text{вх}}}=\frac{1/\omega_0C}{\sqrt{R^2+1/(\omega_0C)^2}}.
+\end{equation}
+Тогда неравенство $U_{\text{вых}} \ll U_{\text{вх}}$ реализуется, если 
+\begin{equation}
+\tau \equiv RC\gg \frac{1}{\omega_0}
+\end{equation}
+(импеданс конденсатора мал по сравнению сопротивлением резистора).
+В таком случае для синусоидального сигнала имеем
+\begin{equation}
+\frac{U_{\text{вых}}}{U_{\text{вх}}}\approx\frac{1}{\omega_0\tau}.
+\end{equation}
+В общем случае, если $\omega_0$ — частота самой низкой гармоники в спектре
+произвольного входного сигнала, то при $\omega_0\tau \gg 1$ неравенство $U_{\text{вых}} \ll U_{\text{вх}}$ выполняется на любой частоте $\omega > \omega_0$.
+
+
+\section*{Экспериментальная установка}
+
+Схема экспериментальной установки показана на рис. 3.
+	
+Действующее значение переменного тока в обмотке $N_0$ измеряется амперметром А (мультиметром GDM). Последовательно с амперметром включено сопротивление $R_{0}$, напряжение с которого подается на вход X электронного осциллографа (ЭО). Это напряжение пропорционально току в обмотке $N_{0}$, а следовательно и напряженности H магнитного поля в образце.
+	
+Для измерения магнитной индукции B с измерительной обмотки $N_{И}$ на вход интегрирующей RC -цепочки подается напряжение $U_{\text{И}}$ ($U_{\text{ВХ}}$), пропорциональное производной $\dot{B}$, а с выхода снимается напряжение $U_{\text{C}}$($U_{\text{ВЫХ}}$), пропорциональное
+величине B , и подается на вход Y осциллограа.
+Замкнутая кривая, возникающая на экране, воспроизводит в некотором масштабе (различном для осей X и Y ) петлю гистерезиса. Чтобы придать этой кривой количественный смысл, необходимо установить масштабы изображения, т.е. провести калибровку каналов X и Y ЭО. Для этого, впервых, надо узнать, каким напряжениям (или токам) соответствуют амплитуды сигналов, видимых на экране, и во-вторых,  каким значениям B и H соответствуют эти напряжения
+(или токи).
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{3.4.5 Петля гистерезиса/pictures/gist.jpg}
+	\caption{ Схема установки для исследования намагничивания образцов}
+	\label{fig:scheme}
+\end{figure}
+
+\section*{Задание}
+\begin{center}
+    I. Петля гистерезиса на экране ЭО
+\end{center}
+
+1) схема собрана как на рисунке 3 и осциллограф настроен под установку по инструкции
+
+2) 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{3.4.5 Петля гистерезиса/pictures/петля пермаллой.png}
+\label{fig:mpr}
+\end{figure}
+
+Сопротивление исчезновения усов: $R^{min}_{\text{пот}} = \frac{1}{7} R_{max}$
+
+Сопротивление с максимальной площадью: $R^{max}_{\text{пот}} = \frac{3}{7} R_{max}$
+
+3) - 6) Подбираем коефициенты для максимальной занимаемой площади и определяем параметры первого образца, пермаллой:
+
+\textit{Параметры:} 
+\begin{itemize}
+    \item $N_0 = 15$
+    \item $N_{\text{и}} = 300$
+    \item $S = 0,66$ см$^2$
+    \item $2\pi R = 14,1$ см
+    
+\end{itemize}
+
+\begin{equation*}
+    \begin{cases}
+        K_X = 20 \;\text{мВ}
+        \\
+        K_Y = 50 \;\text{мВ}
+    \end{cases}
+    ,
+    \begin{cases}
+        2\cdot X_S = 176 \;\text{мВ}
+        \\
+        2\cdot X_Y = 180 \;\text{мВ}
+    \end{cases}
+    ,
+    \begin{cases}
+        [2\cdot X_S] = 120 \;\text{мВ}
+        \\
+        [2\cdot X_Y] = 160 \;\text{мВ}
+    \end{cases}
+\end{equation*}
+
+\begin{table}[h!]
+  		\caption{Начальная кривая намагничивания для первого образца, пермаллоя}
+  		\begin{center}
+  			\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+  				\hline 
+  				№ &  1 &  2 & 3 & 4 & 5 &  6  & 7 \\ 	\hline
+  				
+  			 $ x $, дел & 4.9 & 3.9 & 3.6 & 2.8 & 2.0 & 1.5 & 0.0 \\
+  				 $ y $, дел & 1.8 & 1.4 & 1.1 & 0.7  & 0.35 & 0.2 & 0.0 \\
+  				\hline
+  				
+  			\end{tabular}
+  		\end{center}
+  	\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{3.4.5 Петля гистерезиса/pictures/Пермаллой.png}
+\end{figure}
+
+Повторяем тоже самое для двух других образцов: 8) \\
+\textit{Феррит}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{3.4.5 Петля гистерезиса/pictures/петля Феррит.jpg}
+\label{fig:mpr}
+\end{figure}
+
+\textit{Параметры:} 
+\begin{itemize}
+    \item $N_0 = 42$
+    \item $N_{\text{и}} = 400$
+    \item $S = 3,0$ см$^2$
+    \item $2\pi R = 25,0$ см
+    
+\end{itemize}
+
+\begin{equation*}
+    \begin{cases}
+        K_X = 50 \;\text{мВ}
+        \\
+        K_Y = 50 \;\text{мВ}
+    \end{cases}
+    ,
+    \begin{cases}
+        2\cdot X_S = 220 \;\text{мВ}
+        \\
+        2\cdot X_Y = 110 \;\text{мВ}
+    \end{cases}
+    ,
+    \begin{cases}
+        [2\cdot X_S] = 60 \;\text{мВ}
+        \\
+        [2\cdot X_Y] = 50 \;\text{мВ}
+    \end{cases}
+\end{equation*}
+
+\begin{table}[h!]
+  		\caption{Начальная кривая намагничивания Феррита}
+  		\begin{center}
+  			\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+  				\hline 
+  				№ &  1 &  2 & 3 & 4 & 5 &  6  & 7 \\ 	\hline
+  				
+  			 $ x $, дел & 2.2 & 1.8 & 1.4 & 1.2 & 1.0 & 0.8 & 0.0 \\
+  				 $ y $, дел & 1.1 & 1.0 & 0.8 & 0.7 & 0.6 & 0.4 & 0.0 \\
+  				\hline
+  				
+  			\end{tabular}
+  		\end{center}
+  	\end{table}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.68\linewidth]{3.4.5 Петля гистерезиса/pictures/Феррин.pdf}
+\end{figure} \newpage
+
+\textit{Кремнистое железо}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.2\linewidth]{3.4.5 Петля гистерезиса/pictures/петля Кремнистое железо.jpg}
+\label{fig:mpr}
+\end{figure}
+
+\textit{Параметры:} 
+\begin{itemize}
+    \item $N_0 = 20$
+    \item $N_{\text{и}} = 200$
+    \item $S = 2,0$ см$^2$
+    \item $2\pi R = 11,0$ см
+    
+\end{itemize}
+
+\begin{equation*}
+    \begin{cases}
+        K_X = 100 \;\text{мВ}
+        \\
+        K_Y = 20 \;\text{мВ}
+    \end{cases}
+    ,
+    \begin{cases}
+        2\cdot X_S = 680 \;\text{мВ}
+        \\
+        2\cdot X_Y = 140 \;\text{мВ}
+    \end{cases}
+    ,
+    \begin{cases}
+        [2\cdot X_S] = 160 \;\text{мВ}
+        \\
+        [2\cdot X_Y] = 136 \;\text{мВ}
+    \end{cases}
+\end{equation*}
+
+\begin{table}[h!]
+  		\caption{Начальная кривая намагничивания для кремнистого железа}
+  		\begin{center}
+  			\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+  				\hline 
+  				№ &  1 &  2 & 3 & 4 & 5 &  6  & 7 \\ 	\hline
+  				
+  			 $ x $, дел & 3.4 & 2.4 & 1.7 & 1.2 & 1.0 & 0.6 & 0.0 \\
+  				 $ y $, дел & 3,5 & 3.1 & 2.7 & 2.1  & 1.6 & 0.7 & 0.0 \\
+  				\hline
+  				
+  			\end{tabular}
+  		\end{center}
+  	\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{3.4.5 Петля гистерезиса/pictures/Кремнеевое железо.pdf}
+\end{figure}
+
+\begin{center}
+    II. Проверка калибровки осциллографа
+\end{center}
+9) проводим калибровку по горизонтальной оси закорачивая обмотку на $N_0$:
+\begin{itemize}
+    \item 
+    \begin{equation*}
+    \begin{cases}
+        K_X = 0.1 \;\text{В}
+        \\
+        I_1 = 1.4 \;\text{А}
+        \\
+        2 X_1 = 9.8 
+    \end{cases}
+    \Rightarrow 
+    K_{X_1}^{\text{теор}} = 2R_0 \sqrt{2} I_{\text{эф}}/(2X_1) = 0.08 \;\text{В/дел}
+    \end{equation*}
+
+    \begin{equation*}
+    \begin{cases}
+        K_X = 0.1 \;\text{В}
+        \\
+        I_2 = 1.08 \;\text{А}
+        \\
+        2 X_2 = 7.8 
+    \end{cases}
+    \Rightarrow 
+    K_{X_2}^{\text{теор}} = 2R_0 \sqrt{2} I_{\text{эф}}/(2X_1) = 0.78 \;\text{В/дел}
+    \end{equation*}
+    Получаем отличие от получаемого на экране $\sim20\%$
+    \item 
+    \begin{equation*}
+    \begin{cases}
+        K_X = 50 \;\text{мВ}
+        \\
+        I_1 = 0.68 \;\text{А}
+        \\
+        2 X_1 = 9.8 
+    \end{cases}
+    \Rightarrow 
+    K_{X_1}^{\text{теор}} = 2R_0 \sqrt{2} I_{\text{эф}}/(2X_1) = 39.3 \;\text{мВ/дел}
+    \end{equation*}
+
+    \begin{equation*}
+    \begin{cases}
+        K_X = 50 \;\text{мВ}
+        \\
+        I_2 = 1.03 \;\text{А}
+        \\
+        2 X_2 = 7.4 
+    \end{cases}
+    \Rightarrow 
+    K_{X_2}^{\text{теор}} = 2R_0 \sqrt{2} I_{\text{эф}}/(2X_1) = 39.5 \;\text{мВ/дел}
+    \end{equation*}
+    Получаем отличие от получаемого на экране $\sim20\%$
+    \item 
+    \begin{equation*}
+    \begin{cases}
+        K_X = 20 \;\text{мВ}
+        \\
+        I_1 = 0.256 \;\text{А}
+        \\
+        2 X_1 = 9.2 
+    \end{cases}
+    \Rightarrow 
+    K_{X_1}^{\text{теор}} = 2R_0 \sqrt{2} I_{\text{эф}}/(2X_1) = 16 \;\text{мВ/дел}
+    \end{equation*}
+
+    \begin{equation*}
+    \begin{cases}
+        K_X = 20 \;\text{мВ}
+        \\
+        I_2 = 0.160 \;\text{А}
+        \\
+        2 X_2 = 6.4 
+    \end{cases}
+    \Rightarrow 
+    K_{X_2}^{\text{теор}} = 2R_0 \sqrt{2} I_{\text{эф}}/(2X_1) = 14 \;\text{мВ/дел}
+    \end{equation*}
+    Получаем отличие от получаемого на экране $\sim20\%$, но в последнем измерении была допущена измерительная ошибка (стало ясно потом), измерение не учитывается
+\end{itemize}
+
+Погрешности получал по формуле: $\Delta K^{\text{теор}} = \left( \frac{\Delta R_0}{R_0} + \frac{\Delta I_{\text{эф}}}{I_{\text{эф}}} + \frac{\Delta X_i}{X_i}\right) \cdot K_{\text{теор}}$, где погрешности $\Delta R_0 \rightarrow 0$, $\Delta I_{\text{эф}} = 0.003$ А - определется приборной погрешностью, $\Delta X_i = 0.1$  - определется приборной погрешностью. \\ 
+На этом мое выполнение было закончено 10) - 13) пропускаем. \\
+14) будем пользоваться следующими формулами для определения масштаба: 
+\begin{equation*}
+    I = \frac{I N_0}{2 \pi R} = \frac{K_S N_0}{R_0 2\pi R}
+\end{equation*}
+\begin{equation*}
+    B = \frac{R_{\text{и}} U_{\text{и}}}{S N_{\text{и}}} K_Y
+\end{equation*}
+
+\begin{center}
+    \begin{tabular}{|l|r|r|r|}
+        \hline
+        образец & \multicolumn{1}{l|}{Пармаллоид} & \multicolumn{1}{l|}{Феррит} & \multicolumn{1}{l|}{Кремнистое железо} \\ \hline
+        $H$, $\left( \frac{\text{А}}{\text{м}} \right)$ / дел       & 10.6                            & 42.0                        & 90.9                                   \\ \hline
+        $B$, Тл / дел       & 1.0                             & 0.2                         & 0.2                                    \\ \hline
+    \end{tabular}
+\end{center}
+15) Делаем вычисления на основе получившихся картин на экране осциллографа: 
+\begin{center}
+    \begin{tabular}{|l|r|r|r|}
+        \hline
+        образец & \multicolumn{1}{l|}{Пармаллоид} & \multicolumn{1}{l|}{Феррит} & \multicolumn{1}{l|}{Кремнистое железо} \\ \hline
+        $H_{max}$, $\left( \frac{\text{А}}{\text{м}} \right)$      & 17.0                            & 96.6                        & 318.2                                   \\ \hline
+        $B_S$, Тл       & 1.8                             & 0.2                         & 0.7                                    \\ \hline
+    \end{tabular}
+\end{center}
+16) Считаем коэрцитивное поле $H_c$ и остаточную индукцию $B_r$
+\begin{center}
+    \begin{tabular}{|l|r|r|r|}
+        \hline
+        образец & \multicolumn{1}{l|}{Пармаллоид} & \multicolumn{1}{l|}{Феррит} & \multicolumn{1}{l|}{Кремнистое железо} \\ \hline
+        $H_{c}$, $\left( \frac{\text{А}}{\text{м}} \right)$      & 14.8                            & 29.6                        & 81.8                                   \\ \hline
+        $B_r$, Тл       & 1.6                             & 0.1                         & 0.3                                    \\ \hline
+    \end{tabular}
+\end{center}
+17) Считаем $\mu_{\text{диф}} = \frac{dB}{dH}$:
+\begin{center}
+    \begin{tabular}{|l|r|r|r|}
+        \hline
+        образец & \multicolumn{1}{l|}{Пармаллоид} & \multicolumn{1}{l|}{Феррит} & \multicolumn{1}{l|}{Кремнистое железо} \\ \hline
+        $\mu_{\text{диф}}$, $\frac{\text{дел}}{\text{дел}}$ & 0.1 & 0.4 & 1 \\ \hline
+        $\mu_{\text{диф}}$,  $\left( \frac{\text{А}}{\text{м}\cdot\text{Тл}} \right)\cdot 10^{-3}$     & 9.4                            & 1.9                        & 2.2                                   \\ \hline
+    \end{tabular}
+\end{center}
+Погрешности по нашим данным оценить тяжело, поэтому будет честно взять погрешность $\sim 50 \%$
+
+\section*{Вывод}
+Итого мы с помощью динамическог метода основанного на свойствах интегрирующей цепочки смогли наблюдать кривые гистерезиса для выданных нам образцов, а также измерить коэрцетивную напряженность, остаточную индукцию и индукцию с напряженностью насыщения. Отличия от табличных значений в среднем на 15\%.
+Также мы прокалибровали ОЭ по оси X и получили что значения отличаются в районе 20\%.
+
+\end{document}
